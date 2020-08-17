@@ -6,6 +6,8 @@ order: 5
 
 ## Обчислювані поля
 
+<div class="vueschool"><a href="https://vueschool.io/lessons/vuejs-computed-properties?friend=vuejs" target="_blank" rel="sponsored noopener" title="Вивчи, як обчислені поля працюють з Vue School">Вивчи, як обчислені поля працюють на безкоштовних уроках Vue School</a></div>
+
 Шаблонні вирази дуже зручні, але вони призначені для простих операцій. Додавання великої кількості логіки до шаблонів може зробити їх переповненими і складними для підтримки. Наприклад:
 
 ``` html
