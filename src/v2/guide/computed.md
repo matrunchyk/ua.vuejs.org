@@ -33,7 +33,7 @@ order: 5
 var vm = new Vue({
   el: '#example',
   data: {
-    message: 'Hello'
+    message: 'Привіт'
   },
   computed: {
     // обчислювана властивість
@@ -56,7 +56,7 @@ var vm = new Vue({
 var vm = new Vue({
   el: '#example',
   data: {
-    message: 'Hello'
+    message: 'Привіт'
   },
   computed: {
     reversedMessage: function () {
@@ -67,17 +67,17 @@ var vm = new Vue({
 </script>
 {% endraw %}
 
-Тут ми вказали обчислювану властивість `reversedMessage`. Функція, яку ми подали буде використовуватися як функція-читач для властивості `vm.reversedMessage`:
+Тут ми вказали обчислювану властивість `reversedMessage`. Функція, яку ми подали буде використовуватися як отримувач для властивості `vm.reversedMessage`:
 
 ``` js
-console.log(vm.reversedMessage) // => 'olleH'
-vm.message = 'Goodbye'
-console.log(vm.reversedMessage) // => 'eybdooG'
+console.log(vm.reversedMessage) // => 'тівирП'
+vm.message = 'До зустрічі'
+console.log(vm.reversedMessage) // => 'ічіртсуз оД'
 ```
 
 Ви можете відкрити консоль і гратися з vm з прикладу самостійно. Значення `vm.reversedMessage` завжди залежить від значення `vm.message`.
 
-Ви можете прив'язатися до обчислюваних властивостей в шаблонах так само, як до звичайної властивості. Vue відомо, що `vm.reversedMessage` залежить від `vm.message`, тому буде оновлено кожна прив'язка, яка залежить від `vm.reversedMessage`, коли `vm.message` змінюється. І найкраще це те, що ми створили це відношення залежності декларативно: обчислювана функція-читач не має побічних впливів, що робить її тестування і розуміння простішими.
+Ви можете прив'язатися до обчислюваних властивостей в шаблонах так само, як до звичайної властивості. Vue відомо, що `vm.reversedMessage` залежить від `vm.message`, тому буде оновлена кожна прив'язка, яка залежить від `vm.reversedMessage`, коли `vm.message` змінюється. І найкраще це те, що ми створили це відношення залежності декларативно: обчислюваний отримувач не має побічних впливів, що робить її тестування і розуміння простішими.
 
 ### Обчислене Кешування проти Методів
 
@@ -124,9 +124,9 @@ Vue надає більш загальний спосіб оглядати і р
 var vm = new Vue({
   el: '#demo',
   data: {
-    firstName: 'Foo',
-    lastName: 'Bar',
-    fullName: 'Foo Bar'
+    firstName: 'Фуу',
+    lastName: 'Бар',
+    fullName: 'Фуу Бар'
   },
   watch: {
     firstName: function (val) {
@@ -145,8 +145,8 @@ var vm = new Vue({
 var vm = new Vue({
   el: '#demo',
   data: {
-    firstName: 'Foo',
-    lastName: 'Bar'
+    firstName: 'Фуу',
+    lastName: 'Бар'
   },
   computed: {
     fullName: function () {
@@ -191,7 +191,7 @@ computed: {
 ``` html
 <div id="watch-example">
   <p>
-    Ask a yes/no question:
+    Постав так/ні запитання:
     <input v-model="question">
   </p>
   <p>{{ answer }}</p>
@@ -210,12 +210,12 @@ var watchExampleVM = new Vue({
   el: '#watch-example',
   data: {
     question: '',
-    answer: 'I cannot give you an answer until you ask a question!'
+    answer: 'Я не можу надати вам відповідь поки не буде поставлене запитання!'
   },
   watch: {
     // ця функція буде запускатися кожного разу коли змінюватиметься `question`
     question: function (newQuestion, oldQuestion) {
-      this.answer = 'Waiting for you to stop typing...'
+      this.answer = 'Очікую на припинення вводу...'
       this.debouncedGetAnswer()
     }
   },
@@ -232,17 +232,17 @@ var watchExampleVM = new Vue({
   methods: {
     getAnswer: function () {
       if (this.question.indexOf('?') === -1) {
-        this.answer = 'Questions usually contain a question mark. ;-)'
+        this.answer = 'Запитання зазвичай містять знак питання. ;-)'
         return
       }
-      this.answer = 'Thinking...'
+      this.answer = 'Думаю...'
       var vm = this
       axios.get('https://yesno.wtf/api')
         .then(function (response) {
           vm.answer = _.capitalize(response.data.answer)
         })
         .catch(function (error) {
-          vm.answer = 'Error! Could not reach the API. ' + error
+          vm.answer = 'Помилка! Не можливо досягнути API. ' + error
         })
     }
   }
@@ -267,11 +267,11 @@ var watchExampleVM = new Vue({
   el: '#watch-example',
   data: {
     question: '',
-    answer: 'I cannot give you an answer until you ask a question!'
+    answer: 'Я не можу надати вам відповідь поки не буде поставлене запитання!'
   },
   watch: {
     question: function (newQuestion, oldQuestion) {
-      this.answer = 'Waiting for you to stop typing...'
+      this.answer = 'Очікую на припинення вводу...'
       this.debouncedGetAnswer()
     }
   },
@@ -281,17 +281,17 @@ var watchExampleVM = new Vue({
   methods: {
     getAnswer: function () {
       if (this.question.indexOf('?') === -1) {
-        this.answer = 'Questions usually contain a question mark. ;-)'
+        this.answer = 'Запитання зазвичай містять знак питання. ;-)'
         return
       }
-      this.answer = 'Thinking...'
+      this.answer = 'Думаю...'
       var vm = this
       axios.get('https://yesno.wtf/api')
         .then(function (response) {
           vm.answer = _.capitalize(response.data.answer)
         })
         .catch(function (error) {
-          vm.answer = 'Error! Could not reach the API. ' + error
+          vm.answer = 'Помилка! Не можливо досягнути API. ' + error
         })
     }
   }
