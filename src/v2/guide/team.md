@@ -1290,36 +1290,36 @@ order: 803
         if (work.orgUrl) {
           html += '<a href="' + work.orgUrl + '" target="_blank" rel="noopener noreferrer">'
           if (work.org) {
-            html += work.org;
+            html += work.org
           } else {
-            this.minimizeLink(work.orgUrl);
+            this.minimizeLink(work.orgUrl)
           }
-          html += '</a>';
+          html += '</a>'
         } else if (work.org) {
-          html += work.org;
+          html += work.org
         }
         if (work.role) {
           if (html.length > 0) {
-            html = work.role + ' @ ' + html;
+            html = work.role + ' @ ' + html
           } else {
-            html = work.role;
+            html = work.role
           }
         }
-        return html;
+        return html
       },
       textDistance: function () {
         var distanceInKm = this.profile.distanceInKm || 0
         if (this.$root.useMiles) {
-          return roundDistance(kmToMi(distanceInKm)) + ' миль';
+          return roundDistance(kmToMi(distanceInKm)) + ' миль'
         } else {
-          return roundDistance(distanceInKm) + ' km';
+          return roundDistance(distanceInKm) + ' km'
         }
       },
       languageListHtml: function () {
         var vm = this
         var nav = window.navigator
         if (!vm.profile.languages) return ''
-        var preferredLanguageCode = nav.languages;
+        var preferredLanguageCode = nav.languages
           // The preferred language set in the browser
           ? nav.languages[0]
           : (
