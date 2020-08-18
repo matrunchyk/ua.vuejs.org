@@ -1263,7 +1263,7 @@ order: 803
       ],
       reposPersonal: [
         'vuejsorgua/vue2-docs',
-        'matrunchyk/vu2-oop',
+        'matrunchyk/vue-oop',
       ]
     }
   ]
