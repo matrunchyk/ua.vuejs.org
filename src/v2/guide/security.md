@@ -1,5 +1,5 @@
 ---
-title: Security
+title: Безпека
 type: guide
 order: 504
 ---
