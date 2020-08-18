@@ -1255,6 +1255,25 @@ order: 803
         'https://www.vuemastery.com',
         'https://news.vuejs.org/'
       ]
+    },
+    {
+      name: 'Serhii Matrunchyk',
+      title: 'Full Stack Developer',
+      city: 'Lutsk, Ukraine',
+      languages: ['en', 'ua', 'ru'],
+      github: 'matrunchyk',
+      work: {
+        role: 'CEO',
+        org: 'Digital Idea',
+        orgUrl: 'https://digitalidea.studio/'
+      },
+      links: [
+        'http://vuejs.org.ua/',
+      ],
+      reposPersonal: [
+        'vuejsorgua/vue2-docs',
+        'matrunchyk/vu2-oop',
+      ]
     }
   ]
 
