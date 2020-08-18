@@ -1,5 +1,5 @@
 ---
-title: обчислювані властивості та спостерігачі
+title: Обчислювані властивості та спостерігачі
 type: guide
 order: 5
 ---
@@ -255,7 +255,7 @@ Result:
 {% raw %}
 <div id="watch-example" class="demo">
   <p>
-    Ask a yes/no question:
+    Постав так/ні запитання:
     <input v-model="question">
   </p>
   <p>{{ answer }}</p>
