@@ -4,7 +4,7 @@ type: guide
 order: 7
 ---
 
-<div class="vueschool"><a href="https://vueschool.io/lessons/vuejs-conditionals?friend=vuejs" target="_blank" rel="sponsored noopener" title="Learn how conditional rendering works with Vue School">Learn how conditional rendering works with a free lesson on Vue School</a></div>
+<div class="vueschool"><a href="https://vueschool.io/lessons/vuejs-conditionals?friend=vuejs" target="_blank" rel="sponsored noopener" title="Дізнайтеся, як умовне промальовування працює у Vue School">Дізнайтеся, як умовне промальовування працює на безкоштовному уроці у Vue School</a></div>
 
 ## `v-if`
 
