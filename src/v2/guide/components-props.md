@@ -1,5 +1,5 @@
 ---
-title: Властивості
+title: Вхідні параметри
 type: guide
 order: 102
 ---
