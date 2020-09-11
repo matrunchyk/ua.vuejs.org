@@ -4,12 +4,12 @@ type: guide
 order: 8
 ---
 
-<div class="vueschool"><a href="https://vueschool.io/lessons/vuejs-loops?friend=vuejs" target="_blank" rel="sponsored noopener" title="Learn how to render lists on Vue School">Learn how to render list with a free Vue School lesson</a></div>
+<div class="vueschool"><a href="https://vueschool.io/lessons/vuejs-loops?friend=vuejs" target="_blank" rel="sponsored noopener" title="Дізнайтеся, як відмальовувати списки у Vue School">Дізнайтеся, як відмальовувати списки на безкоштовному уроці у Vue School</a></div>
 
 
-## Mapping an Array to Elements with `v-for`
+## Зіставлення масиву з елементами за допомогою `v-for`
 
-We can use the `v-for` directive to render a list of items based on an array. The `v-for` directive requires a special syntax in the form of `item in items`, where `items` is the source data array and `item` is an **alias** for the array element being iterated on:
+Ви можете скористатися директивою `v-for` для відмальовування елементів списку на основі масиву. Директива `v-for` вимагає спеціального синтаксису у формі `item in items`, де `items` є вихідним масивом даних, та `item` є **псевдонімом** для масиву ітерованих елементів:
 
 ``` html
 <ul id="example-1">
@@ -44,15 +44,15 @@ var example1 = new Vue({
   el: '#example-1',
   data: {
     items: [
-      { message: 'Foo' },
-      { message: 'Bar' }
+      { message: 'Фуу' },
+      { message: 'Бар' }
     ]
   }
 })
 </script>
 {% endraw %}
 
-Inside `v-for` blocks we have full access to parent scope properties. `v-for` also supports an optional second argument for the index of the current item.
+Всередині блоків `v-for` ми маємо повний доступ до властивостей батьківської області змінних. Також, `v-for` підтримує необов'язковий другий аргумент для індексації поточного елементу списку.
 
 ``` html
 <ul id="example-2">
@@ -68,8 +68,8 @@ var example2 = new Vue({
   data: {
     parentMessage: 'Parent',
     items: [
-      { message: 'Foo' },
-      { message: 'Bar' }
+      { message: 'Фуу' },
+      { message: 'Бар' }
     ]
   }
 })
@@ -89,23 +89,23 @@ var example2 = new Vue({
   data: {
     parentMessage: 'Parent',
     items: [
-      { message: 'Foo' },
-      { message: 'Bar' }
+      { message: 'Фуу' },
+      { message: 'Бар' }
     ]
   }
 })
 </script>
 {% endraw %}
 
-You can also use `of` as the delimiter instead of `in`, so that it is closer to JavaScript's syntax for iterators:
+Ви також можете використовувати `of` як розділювач замість `in`, що дуже схоже до синтаксису ітерацій JavaScript:
 
 ``` html
 <div v-for="item of items"></div>
 ```
 
-## `v-for` with an Object
+## `v-for` з об'єктом
 
-You can also use `v-for` to iterate through the properties of an object.
+Ви також можете використовувати `v-for` для ітерацій по властивостях об'єкту:
 
 ``` html
 <ul id="v-for-object" class="demo">
@@ -120,9 +120,9 @@ new Vue({
   el: '#v-for-object',
   data: {
     object: {
-      title: 'How to do lists in Vue',
-      author: 'Jane Doe',
-      publishedAt: '2016-04-10'
+      title: 'Як зробити списки на Vue',
+      author: 'Сергій Іванович',
+      publishedAt: '2020-09-11'
     }
   }
 })
@@ -141,16 +141,16 @@ new Vue({
   el: '#v-for-object',
   data: {
     object: {
-      title: 'How to do lists in Vue',
-      author: 'Jane Doe',
-      publishedAt: '2016-04-10'
+      title: 'Як зробити списки на Vue',
+      author: 'Сергій Іванович',
+      publishedAt: '2020-09-11'
     }
   }
 })
 </script>
 {% endraw %}
 
-You can also provide a second argument for the property's name (a.k.a. key):
+Ви також можете вказати другий аргумент для імені властивості (також відомий як ключ):
 
 ``` html
 <div v-for="(value, name) in object">
@@ -169,16 +169,16 @@ new Vue({
   el: '#v-for-object-value-name',
   data: {
     object: {
-      title: 'How to do lists in Vue',
-      author: 'Jane Doe',
-      publishedAt: '2016-04-10'
+      title: 'Як зробити списки на Vue',
+      author: 'Сергій Іванович',
+      publishedAt: '2020-09-11
     }
   }
 })
 </script>
 {% endraw %}
 
-And another for the index:
+І ще один приклад з індексацією:
 
 ``` html
 <div v-for="(value, name, index) in object">
@@ -197,9 +197,9 @@ new Vue({
   el: '#v-for-object-value-name-index',
   data: {
     object: {
-      title: 'How to do lists in Vue',
-      author: 'Jane Doe',
-      publishedAt: '2016-04-10'
+      title: 'Як зробити списки на Vue',
+      author: 'Сергій Іванович',
+      publishedAt: '2020-09-11
     }
   }
 })
