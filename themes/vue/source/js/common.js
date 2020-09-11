@@ -346,12 +346,16 @@
     versionSelect && versionSelect.addEventListener('change', function (e) {
       var version = e.target.value
       var section = window.location.pathname.match(/\/v\d\/(\w+?)\//)[1]
+      var domain = 'vuejs.org.ua/'
       if (version === 'SELF') return
+      if (parseInt(version) < 2) {
+        domain = 'vuejs.org/'
+      }
       window.location.assign(
         'https://' +
         version +
         (version && '.') +
-        'vuejs.org/' + section + '/'
+        domain + section + '/'
       )
     })
   }
