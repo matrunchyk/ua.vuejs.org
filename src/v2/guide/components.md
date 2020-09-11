@@ -4,25 +4,27 @@ type: guide
 order: 11
 ---
 
-<div class="vueschool"><a href="https://vueschool.io/courses/vuejs-components-fundamentals?friend=vuejs" target="_blank" rel="sponsored noopener" title="Free Vue.js Components Fundamentals Course">Watch a free video course on Vue School</a></div>
+<div class="vueschool"><a href="https://vueschool.io/courses/vuejs-components-fundamentals?friend=vuejs" target="_blank" rel="sponsored noopener" title="Free Vue.js Components Fundamentals Course">Подивитись безкоштовний відеокурс на Vue School</a></div>
 
-## Base Example
+## Базовий приклад
 
-Here's an example of a Vue component:
+Ось приклад компонента Vue:
 
-``` js
-// Define a new component called button-counter
-Vue.component('button-counter', {
+```js
+// Створимо новий компонент, що називається button-counter
+Vue.component("button-counter", {
   data: function () {
     return {
-      count: 0
-    }
+      count: 0,
+    };
   },
-  template: '<button v-on:click="count++">You clicked me {{ count }} times.</button>'
-})
+  template:
+    '<button v-on:click="count++">Ви натиснули на кнопку {{ count }} кількість разів.</button>',
+});
 ```
 
-Components are reusable Vue instances with a name: in this case, `<button-counter>`. We can use this component as a custom element inside a root Vue instance created with `new Vue`:
+Компоненти - це іменовані екземпляри Vue, які можна перевикористовувати.
+У даному випадку це компонент з іменем `<button-counter>`. Ми можемо використати цей компонент як нестандартний тег всередині основного екземпляру Vue, створеного за допомогою `new Vue`:
 
 ```html
 <div id="components-demo">
@@ -35,6 +37,7 @@ new Vue({ el: '#components-demo' })
 {% endcodeblock %}
 
 {% raw %}
+
 <div id="components-demo" class="demo">
   <button-counter></button-counter>
 </div>
@@ -45,17 +48,17 @@ Vue.component('button-counter', {
       count: 0
     }
   },
-  template: '<button v-on:click="count += 1">You clicked me {{ count }} times.</button>'
+  template: '<button v-on:click="count += 1">Ви натиснули на кнопку {{ count }} кількість разів.</button>'
 })
 new Vue({ el: '#components-demo' })
 </script>
 {% endraw %}
 
-Since components are reusable Vue instances, they accept the same options as `new Vue`, such as `data`, `computed`, `watch`, `methods`, and lifecycle hooks. The only exceptions are a few root-specific options like `el`.
+Компоненти - це просто екземпляри Vue, тому вони приймають ті ж самі параметри, що і базовий екземпляр, створений за допомогою `new Vue`. Наприклад, компонент може приймати такі параметри, як `data`, `computed`, `watch`, `methods` та хуки життєвого циклу. Єдині виключення - це декілька специфічних, для основного екземпляру, параметрів наприклад `el`.
 
-## Reusing Components
+## Перевикористання компонентів
 
-Components can be reused as many times as you want:
+Компоненти можуть бути використані стільки разів, скільки буде потрібно.
 
 ```html
 <div id="components-demo">
@@ -66,6 +69,7 @@ Components can be reused as many times as you want:
 ```
 
 {% raw %}
+
 <div id="components-demo2" class="demo">
   <button-counter></button-counter>
   <button-counter></button-counter>
@@ -76,19 +80,19 @@ new Vue({ el: '#components-demo2' })
 </script>
 {% endraw %}
 
-Notice that when clicking on the buttons, each one maintains its own, separate `count`. That's because each time you use a component, a new **instance** of it is created.
+Зауважте, що кожна кнопка має свій `лічильник` натискань. Це відбувається тому, що кожного разу, коли ви використовуєте компонент - створються новий **екземпляр** цього компоненту.
 
-### `data` Must Be a Function
+### `data` Має бути функцією
 
-When we defined the `<button-counter>` component, you may have noticed that `data` wasn't directly provided an object, like this:
+При створенні компонента `<button-counter>`, ви могли помітити, що `data` не передається напряму як об'єкт, наприклад:
 
 ```js
 data: {
-  count: 0
+  count: 0;
 }
 ```
 
-Instead, **a component's `data` option must be a function**, so that each instance can maintain an independent copy of the returned data object:
+Замість цього, **параметр `data` має бути функцією**, таким чином кожен екземпляр компонента буде працювати з власною незалежною копією об'єкта data:
 
 ```js
 data: function () {
@@ -98,9 +102,10 @@ data: function () {
 }
 ```
 
-If Vue didn't have this rule, clicking on one button would affect the data of _all other instances_, like below:
+Якщо б Vue не дотримувався цього правила, то натискання на будь-яку з кнопок призводило б до змін у _всіх інших екземплярах_, як у прикладі нижче:
 
 {% raw %}
+
 <div id="components-demo3" class="demo">
   <button-counter2></button-counter2>
   <button-counter2></button-counter2>
@@ -114,60 +119,62 @@ Vue.component('button-counter2', {
   data: function () {
     return buttonCounter2Data
   },
-  template: '<button v-on:click="count++">You clicked me {{ count }} times.</button>'
+  template: '<button v-on:click="count++">Ви натисли на кнопку {{ count }} кількість разів.</button>'
 })
 new Vue({ el: '#components-demo3' })
 </script>
 {% endraw %}
 
-## Organizing Components
+## Організація компонентів
 
-It's common for an app to be organized into a tree of nested components:
+Зазвичай компоненти організуються у вигляді дерева
 
 ![Component Tree](/images/components.png)
 
-For example, you might have components for a header, sidebar, and content area, each typically containing other components for navigation links, blog posts, etc.
+Наприклад, ви можете мати компонент для заголовка, бокової панелі та зони з основним контентом, кожен з яких зазвичай містить у собі інші компоненти - посилання, дописи блогу та ін.
 
-To use these components in templates, they must be registered so that Vue knows about them. There are two types of component registration: **global** and **local**. So far, we've only registered components globally, using `Vue.component`:
+Щоб використовувати дочірні компоненти у шаблонах - вони повинні бути зареєстровані так, щоб Vue міг з ними працювати. Існує 2 способи реєстрації компонента: **глобально** та **локально**. До цього моменту ми реєстрували компоненти лише глобально, використовуючи `Vue.component`:
 
 ```js
-Vue.component('my-component-name', {
+Vue.component("my-component-name", {
   // ... options ...
-})
+});
 ```
 
-Globally registered components can be used in the template of any root Vue instance (`new Vue`) created afterwards -- and even inside all subcomponents of that Vue instance's component tree.
+Компоненти, що зареєстровані глобально, можуть бути використані у шаблоні будь-якого кореневого екземпляру Vue (`new Vue`), створеного після реєстрації - і навіть у шаблонах усіх дочірніх компонентів цього екземпляру.
 
-That's all you need to know about registration for now, but once you've finished reading this page and feel comfortable with its content, we recommend coming back later to read the full guide on [Component Registration](components-registration.html).
+Наразі це все, що вам потрібно знати про реєстрацію компонентів, але коли ви завершите читати цю сторінку і освоїте викладені концепції, ми рекомендуємо повернутись і прочитати повний посібник по роботі з компонентами [Реєстрація Компонентів](components-registration.html).
 
-## Passing Data to Child Components with Props
+## Передача даних у дочірні компоненти за допомогою вхідних параметрів
 
-Earlier, we mentioned creating a component for blog posts. The problem is, that component won't be useful unless you can pass data to it, such as the title and content of the specific post we want to display. That's where props come in.
+Раніше ми згадували створення компонента для постів у блозі. Проблема у тому, що такий компонент буде не надто корисним, до того моменту, як ви зможете передавати дані всередину цього компонента, наприклад, заголовок і вміст конкретного допису блогу, який ми хочемо відобразити. Саме для цього нам і знадобляться вхідні параметри (`props`) компонента.
 
-Props are custom attributes you can register on a component. When a value is passed to a prop attribute, it becomes a property on that component instance. To pass a title to our blog post component, we can include it in the list of props this component accepts, using a `props` option:
+Вхідні параметри — це спеціальні атрибути, які можуть бути встановлені для компонента. Коли ми передаємо значення у вхідні параметри екземпляра, воно стає властивістю конкретного екземпляра.
+Для того, щоб передати заголовок до нашого компонента з дописом, потрібно включити заголовок до списку вхідних параметрів, які даний компонент приймає, використовуючи `props`.
 
 ```js
-Vue.component('blog-post', {
-  props: ['title'],
-  template: '<h3>{{ title }}</h3>'
-})
+Vue.component("blog-post", {
+  props: ["title"],
+  template: "<h3>{{ title }}</h3>",
+});
 ```
 
-A component can have as many props as you'd like and by default, any value can be passed to any prop. In the template above, you'll see that we can access this value on the component instance, just like with `data`.
+Компонент може мати будь-яку кількість вхідних параметрів, і за замовчуванням будь-яке значення може бути передано до будь-якого параметру. У шаблоні нижче ви можете побачити, що ми можемо отримати доступ до цього значення аналогічним способом, який ми використовуємо для доступу до опції `data`.
 
-Once a prop is registered, you can pass data to it as a custom attribute, like this:
+Як тільки ви визначили вхідні параметри, то зможете передати дані всередину наступним чином.
 
 ```html
-<blog-post title="My journey with Vue"></blog-post>
-<blog-post title="Blogging with Vue"></blog-post>
-<blog-post title="Why Vue is so fun"></blog-post>
+<blog-post title="Мій шлях з Vue"></blog-post>
+<blog-post title="Блоги по Vue"></blog-post>
+<blog-post title="Чому Vue такий цікавий"></blog-post>
 ```
 
 {% raw %}
+
 <div id="blog-post-demo" class="demo">
-  <blog-post1 title="My journey with Vue"></blog-post1>
-  <blog-post1 title="Blogging with Vue"></blog-post1>
-  <blog-post1 title="Why Vue is so fun"></blog-post1>
+  <blog-post1 title="Мій шлях з Vue"></blog-post1>
+  <blog-post1 title="Блоги по Vue"></blog-post1>
+  <blog-post1 title="Чому Vue такий цікавий"></blog-post1>
 </div>
 <script>
 Vue.component('blog-post1', {
@@ -178,22 +185,22 @@ new Vue({ el: '#blog-post-demo' })
 </script>
 {% endraw %}
 
-In a typical app, however, you'll likely have an array of posts in `data`:
+Зазвичай, ви захочете мати масив дописів всередині `data`
 
 ```js
 new Vue({
-  el: '#blog-post-demo',
+  el: "#blog-post-demo",
   data: {
     posts: [
-      { id: 1, title: 'My journey with Vue' },
-      { id: 2, title: 'Blogging with Vue' },
-      { id: 3, title: 'Why Vue is so fun' }
-    ]
-  }
-})
+      { id: 1, title: "Мій шлях з Vue" },
+      { id: 2, title: "Блоги по Vue" },
+      { id: 3, title: "Чому Vue такий цікавий" },
+    ],
+  },
+});
 ```
 
-Then want to render a component for each one:
+А потім ви захочете промалювати компонент для кожного з постів:
 
 ```html
 <blog-post
@@ -203,26 +210,26 @@ Then want to render a component for each one:
 ></blog-post>
 ```
 
-Above, you'll see that we can use `v-bind` to dynamically pass props. This is especially useful when you don't know the exact content you're going to render ahead of time, like when [fetching posts from an API](https://codesandbox.io/s/github/vuejs/vuejs.org/tree/master/src/v2/examples/vue-20-component-blog-post-example).
+Вище ви можете побачити, що ми використовуємо `v-bind` для динамічної передачі вхідних параметрів. Це надзвичайно корисно коли ви не знаєте заздалегідь, який саме контент ви збираєтесь промалювати, наприклад у ситуації коли ми [отримуємо дописи з API](https://codesandbox.io/s/github/vuejs/vuejs.org/tree/master/src/v2/examples/vue-20-component-blog-post-example).
 
-That's all you need to know about props for now, but once you've finished reading this page and feel comfortable with its content, we recommend coming back later to read the full guide on [Props](components-props.html).
+Це все що вам потрібно знати про вхідні параметри наразі, але коли ви прочитаєте й освоїте всю інформацію на цій сторінці, ми рекомендуємо повернутись і прочитати повне керівництво по [Вхідних параметрах](components-props.html).
 
-## A Single Root Element
+## Один кореневий елемент
 
-When building out a `<blog-post>` component, your template will eventually contain more than just the title:
+При створенні компоненту на кшталт `<blog-post>`, ваш шаблон згодом буде містити більше ніж один тег з заголовком:
 
 ```html
 <h3>{{ title }}</h3>
 ```
 
-At the very least, you'll want to include the post's content:
+Як мінімум ви захочете додати контент самого допису:
 
 ```html
 <h3>{{ title }}</h3>
 <div v-html="content"></div>
 ```
 
-If you try this in your template however, Vue will show an error, explaining that **every component must have a single root element**. You can fix this error by wrapping the template in a parent element, such as:
+Якщо ви спробуєте використати такий шаблон, Vue вкаже на помилку яка каже про те, що **кожен компонент має мати один кореневий елемент (тег)**. Ви можете виправити цю помилку просто загорнувши ваш шаблон в один кореневий елемент, наприклад таким чином:
 
 ```html
 <div class="blog-post">
@@ -231,7 +238,7 @@ If you try this in your template however, Vue will show an error, explaining tha
 </div>
 ```
 
-As our component grows, it's likely we'll not only need the title and content of a post, but also the published date, comments, and more. Defining a prop for each related piece of information could become very annoying:
+З часом, наш компонент буде ставати більш об'ємним і нам знадобляться не тільки заголовок та контент допису, але й дата публікації, коментарі та ін. Створювати вхідні параметри для кожного пов'язаного шматочка інформації може бути доволі незручно.
 
 ```html
 <blog-post
@@ -244,7 +251,7 @@ As our component grows, it's likely we'll not only need the title and content of
 ></blog-post>
 ```
 
-So this might be a good time to refactor the `<blog-post>` component to accept a single `post` prop instead:
+То ж зараз, вдалий момент для рефакторингу нашого `<blog-post>` компонента таким чином, що він буде приймати один вхідний параметр `post`.
 
 ```html
 <blog-post
@@ -255,38 +262,41 @@ So this might be a good time to refactor the `<blog-post>` component to accept a
 ```
 
 ```js
-Vue.component('blog-post', {
-  props: ['post'],
+Vue.component("blog-post", {
+  props: ["post"],
   template: `
     <div class="blog-post">
       <h3>{{ post.title }}</h3>
       <div v-html="post.content"></div>
     </div>
-  `
-})
+  `,
+});
 ```
 
-<p class="tip">The above example and some future ones use JavaScript's [template literal](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals) to make multi-line templates more readable. These are not supported by Internet Explorer (IE), so if you must support IE and are not transpiling (e.g. with Babel or TypeScript), use [newline escapes](https://css-tricks.com/snippets/javascript/multiline-string-variables-in-javascript/) instead.</p>
 
-Now, whenever a new property is added to `post` objects, it will automatically be available inside `<blog-post>`.
+<p class="tip">Приклад вище і деякі наступні використовують [літерал шаблону JavaScript](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals) для того, щоб зробити багаторядкові шаблони зручнішими для читання. Ця функція не підтримується у Internet Explorer (IE), тож якщо вам важлива підтримка IE, і ви не використовуєте Babel чи TypeScript, скористайтеся [записом зі зворотнім слешем для багаторядкових шаблонів](https://css-tricks.com/snippets/javascript/multiline-string-variables-in-javascript/).</p>
 
-## Listening to Child Components Events
+Тепер, коли новий вхідний параметр доданий до `post` об'єктів, він буде автоматично доступний всередині `<blog-post>`.
 
-As we develop our `<blog-post>` component, some features may require communicating back up to the parent. For example, we may decide to include an accessibility feature to enlarge the text of blog posts, while leaving the rest of the page its default size:
+## Прослуховування подій від дочірнього елемента
 
-In the parent, we can support this feature by adding a `postFontSize` data property:
+Згодом наш компонент `<blog-post>` може потребувати можливості комунікувати з батьківським компонентом. Наприклад, ми можемо додати можливість збільшити шрифт тексту у дописі, залишаючи решту сторінки незмінною.
+
+У батьківському елементі ми можемо додати підтримку такої можливості за допомогою створення змінної `postFontSize` всередині `data`.
 
 ```js
 new Vue({
-  el: '#blog-posts-events-demo',
+  el: "#blog-posts-events-demo",
   data: {
-    posts: [/* ... */],
-    postFontSize: 1
-  }
-})
+    posts: [
+      /* ... */
+    ],
+    postFontSize: 1,
+  },
+});
 ```
 
-Which can be used in the template to control the font size of all blog posts:
+Ця змінна може бути використана у шаблоні для зміни розміру шрифту у всіх дописах.
 
 ```html
 <div id="blog-posts-events-demo">
@@ -300,51 +310,50 @@ Which can be used in the template to control the font size of all blog posts:
 </div>
 ```
 
-Now let's add a button to enlarge the text right before the content of every post:
+Тепер додамо кнопку, яка буде збільшувати шрифт, прямо перед вмістом кожного допису.
 
 ```js
-Vue.component('blog-post', {
-  props: ['post'],
+Vue.component("blog-post", {
+  props: ["post"],
   template: `
     <div class="blog-post">
       <h3>{{ post.title }}</h3>
       <button>
-        Enlarge text
+        Збільшити текст
       </button>
       <div v-html="post.content"></div>
     </div>
-  `
-})
+  `,
+});
+
 ```
 
-The problem is, this button doesn't do anything:
+Проблема у тому, що наразі кнопка нічого не робить:
 
 ```html
 <button>
-  Enlarge text
+  Збільшити текст
 </button>
 ```
 
-When we click on the button, we need to communicate to the parent that it should enlarge the text of all posts. Fortunately, Vue instances provide a custom events system to solve this problem. The parent can choose to listen to any event on the child component instance with `v-on`, just as we would with a native DOM event:
+Коли ми натискаємо на кнопку, вона повинна комунікувати з батьківським компонентом, який у свою чергу, має збільшити розмір шрифту. На щастя, екземпляр Vue має спеціальну систему подій для роз цієї проблеми. Батьківський компонент може реагувати на будь-яку подію у дочірньому компоненті за допомогою директиви `v-on`, так само як це відбувається зі звичайною подією DOM:
 
 ```html
-<blog-post
-  ...
-  v-on:enlarge-text="postFontSize += 0.1"
-></blog-post>
+<blog-post ... v-on:enlarge-text="postFontSize += 0.1"></blog-post>
 ```
 
-Then the child component can emit an event on itself by calling the built-in [**`$emit`** method](../api/#vm-emit), passing the name of the event:
+Дочірній компонент може сам генерувати події, викликаючи вбудований [**$emit** метод](../api/#vm-emit) та передаючи йому назву події:
 
 ```html
 <button v-on:click="$emit('enlarge-text')">
-  Enlarge text
+  Збільшити текст
 </button>
 ```
 
-Thanks to the `v-on:enlarge-text="postFontSize += 0.1"` listener, the parent will receive the event and update `postFontSize` value.
+Завдяки прослуховуванню події `v-on:enlarge-text="postFontSize += 0.1"`, батьківський елемент простежить цю подію й оновить значення `postFontSize`.
 
 {% raw %}
+
 <div id="blog-posts-events-demo" class="demo">
   <div :style="{ fontSize: postFontSize + 'em' }">
     <blog-post
@@ -362,7 +371,7 @@ Vue.component('blog-post', {
     <div class="blog-post">\
       <h3>{{ post.title }}</h3>\
       <button v-on:click="$emit(\'enlarge-text\')">\
-        Enlarge text\
+        Збільшити текст\
       </button>\
       <div v-html="post.content"></div>\
     </div>\
@@ -372,9 +381,9 @@ new Vue({
   el: '#blog-posts-events-demo',
   data: {
     posts: [
-      { id: 1, title: 'My journey with Vue', content: '...content...' },
-      { id: 2, title: 'Blogging with Vue', content: '...content...' },
-      { id: 3, title: 'Why Vue is so fun', content: '...content...' }
+      { id: 1, title: 'Мій шлях з Vue', content: '...content...' },
+      { id: 2, title: 'Блоги по Vue', content: '...content...' },
+      { id: 3, title: 'Чому Vue такий цікавий', content: '...content...' }
     ],
     postFontSize: 1
   }
@@ -382,35 +391,29 @@ new Vue({
 </script>
 {% endraw %}
 
-### Emitting a Value With an Event
+### Передача даних разом з подією
 
-It's sometimes useful to emit a specific value with an event. For example, we may want the `<blog-post>` component to be in charge of how much to enlarge the text by. In those cases, we can use `$emit`'s 2nd parameter to provide this value:
+Інколи буває корисно генерувати спеціальне значення разом з подією. Наприклад, ми захочемо щоб компонент `<blog-post>` відповідав за те, наскільки збільшити розмір шрифту. У цьому випадку ми можемо використати другий параметр у методі `$emit` для передачі значення.
 
 ```html
 <button v-on:click="$emit('enlarge-text', 0.1)">
-  Enlarge text
+  Збільшити текст
 </button>
 ```
 
-Then when we listen to the event in the parent, we can access the emitted event's value with `$event`:
+Тоді прослуховуючи цю подію у батьківському компоненті ми можемо отримати доступ до переданого разом з подією значення через `$event`
 
 ```html
-<blog-post
-  ...
-  v-on:enlarge-text="postFontSize += $event"
-></blog-post>
+<blog-post ... v-on:enlarge-text="postFontSize += $event"></blog-post>
 ```
 
-Or, if the event handler is a method:
+Або наступним чином, якщо обробкою події займається метод:
 
 ```html
-<blog-post
-  ...
-  v-on:enlarge-text="onEnlargeText"
-></blog-post>
+<blog-post ... v-on:enlarge-text="onEnlargeText"></blog-post>
 ```
 
-Then the value will be passed as the first parameter of that method:
+В такому разі значення буде передано у першому параметрі цього методу.
 
 ```js
 methods: {
@@ -420,82 +423,84 @@ methods: {
 }
 ```
 
-### Using `v-model` on Components
+### Використання `v-model` на компонентах
 
-Custom events can also be used to create custom inputs that work with `v-model`. Remember that:
+Визначені користувачем події можуть бути також використані для створення спеціального вводу, який працює з `v-model`. Згадайте, що:
 
 ```html
-<input v-model="searchText">
+<input v-model="searchText" />
 ```
 
-does the same thing as:
+еквівалентно наступному:
 
 ```html
 <input
   v-bind:value="searchText"
   v-on:input="searchText = $event.target.value"
->
+/>
 ```
 
-When used on a component, `v-model` instead does this:
+Якщо використати `v-model` на компоненті, буде виконано наступне:
 
-``` html
+```html
 <custom-input
   v-bind:value="searchText"
   v-on:input="searchText = $event"
 ></custom-input>
 ```
 
-For this to actually work though, the `<input>` inside the component must:
+Щоб це дійсно спрацювало, `<input>` всередині компонента має задовільняти наступному:
 
-- Bind the `value` attribute to a `value` prop
-- On `input`, emit its own custom `input` event with the new value
+- Зв'язувати значення атрибута `<value>` з вхідним параметром `<value>`
+- При виникненні події `<input>` генерувати визначену користувачем подію `<input>` з новим значенням
 
-Here's that in action:
+Ось як це працює:
 
 ```js
-Vue.component('custom-input', {
-  props: ['value'],
+Vue.component("custom-input", {
+  props: ["value"],
   template: `
     <input
       v-bind:value="value"
       v-on:input="$emit('input', $event.target.value)"
     >
-  `
-})
+  `,
+});
 ```
 
-Now `v-model` should work perfectly with this component:
+Тепер директива `v-model` повинна ідеально працювати з цим компонентом:
 
 ```html
 <custom-input v-model="searchText"></custom-input>
 ```
 
-That's all you need to know about custom component events for now, but once you've finished reading this page and feel comfortable with its content, we recommend coming back later to read the full guide on [Custom Events](components-custom-events.html).
+Наразі це все, що вам потрібно знати про нестандартні події у компонентах, але коли ви прочитаєте і розберетесь з усією інформацією на цій сторінці, ми рекомендуємо повернутись і прочитати повне керівництво по [Нестандартним подіям](components-custom-events.html).
 
-## Content Distribution with Slots
 
-Just like with HTML elements, it's often useful to be able to pass content to a component, like this:
+## Передача контенту у слоти
 
-``` html
+Як і зі звичайними HTML-елементами, часто буває корисно передати певний вміст у компонент, наприклад:
+
+```html
 <alert-box>
-  Something bad happened.
+  Сталося щось недобре.
 </alert-box>
 ```
 
-Which might render something like:
+Що може виглядати приблизно таким чином:
 
 {% raw %}
+
 <div id="slots-demo" class="demo">
   <alert-box>
-    Something bad happened.
+    Сталося щось недобре.
   </alert-box>
 </div>
 <script>
 Vue.component('alert-box', {
   template: '\
     <div class="demo-alert-box">\
-      <strong>Error!</strong>\
+      <strong>Помилка!</strong>\
       <slot></slot>\
     </div>\
   '
@@ -511,28 +516,29 @@ new Vue({ el: '#slots-demo' })
 </style>
 {% endraw %}
 
-Fortunately, this task is made very simple by Vue's custom `<slot>` element:
+На щастя, це завдання може бути виконано дуже просто за допомогою нестандартних елементів `<slot>`:
 
 ```js
-Vue.component('alert-box', {
+Vue.component("alert-box", {
   template: `
     <div class="demo-alert-box">
-      <strong>Error!</strong>
+      <strong>Помилка!</strong>
       <slot></slot>
     </div>
-  `
-})
+  `,
+});
 ```
 
-As you'll see above, we just add the slot where we want it to go -- and that's it. We're done!
+Як ви можете бачити, ми просто додали слот там, де нам потрібно — і це все. Справу зроблено.
 
-That's all you need to know about slots for now, but once you've finished reading this page and feel comfortable with its content, we recommend coming back later to read the full guide on [Slots](components-slots.html).
+Наразі це все, що вам потрібно знати про слоти, але коли ви прочитаєте і розберетесь з усією інформацією на цій сторінці, ми рекомендуємо повернутись і прочитати повне керівництво по [Слотах](components-slots.html)
 
-## Dynamic Components
+## Динамічне перемикання між компонентами
 
-Sometimes, it's useful to dynamically switch between components, like in a tabbed interface:
+Інколи буває необхідно динамічно перемикатись між компонентами, як наприклад в інтерфейсі з вкладками:
 
 {% raw %}
+
 <div id="dynamic-component-demo" class="demo">
   <button
     v-for="tab in tabs"
@@ -549,9 +555,9 @@ Sometimes, it's useful to dynamically switch between components, like in a tabbe
   ></component>
 </div>
 <script>
-Vue.component('tab-home', { template: '<div>Home component</div>' })
-Vue.component('tab-posts', { template: '<div>Posts component</div>' })
-Vue.component('tab-archive', { template: '<div>Archive component</div>' })
+Vue.component('tab-home', { template: '<div>Головний компонент</div>' })
+Vue.component('tab-posts', { template: '<div>Компонент з блогом</div>' })
+Vue.component('tab-archive', { template: '<div>Компонент архіву</div>' })
 new Vue({
   el: '#dynamic-component-demo',
   data: {
@@ -589,50 +595,50 @@ new Vue({
 </style>
 {% endraw %}
 
-The above is made possible by Vue's `<component>` element with the `is` special attribute:
+Показане вище можливе завдяки елементу Vue `<component>`, який має спеціальний атрибут `<is>`:
 
 ```html
-<!-- Component changes when currentTabComponent changes -->
+<!-- Компонент змінюється currentTabComponent, змінюється і компонент -->
 <component v-bind:is="currentTabComponent"></component>
 ```
 
-In the example above, `currentTabComponent` can contain either:
+У прикладі вище `currentTabComponent` може містити:
 
-- the name of a registered component, or
-- a component's options object
+- ім'я зареєстрованого компонента, або
+- об'єкт з налаштуваннями для компонента
 
-See [this example](https://codesandbox.io/s/github/vuejs/vuejs.org/tree/master/src/v2/examples/vue-20-dynamic-components) to experiment with the full code, or [this version](https://codesandbox.io/s/github/vuejs/vuejs.org/tree/master/src/v2/examples/vue-20-dynamic-components-with-binding) for an example binding to a component's options object, instead of its registered name.
+Подивіться на [цей приклад](https://codesandbox.io/s/github/vuejs/vuejs.org/tree/master/src/v2/examples/vue-20-dynamic-components) щоб поекспериментувати з повним кодом або на [інший приклад](https://codesandbox.io/s/github/vuejs/vuejs.org/tree/master/src/v2/examples/vue-20-dynamic-components-with-binding)), що містить прив'язку до об'єкта з налаштуваннями компонента замість зареєстрованого імені.
 
-Keep in mind that this attribute can be used with regular HTML elements, however they will be treated as components, which means all attributes **will be bound as DOM attributes**. For some properties such as `value` to work as you would expect, you will need to bind them using the [`.prop` modifier](../api/#v-bind).
+Майте на увазі, що цей атрибут може бути використаний зі звичайними HTML елементами, разом з тим вони будуть розглянуті як компоненти, що означатиме, що усі атрибути **будуть прив'язані як атрибути DOM**. Щоб деякі властивостей, такі як `value` працювали, як ви цього очікуєте, вам потрібно зв'язати їх, використовуючи [модифікатор `.prop`](../api/#v-bind).
 
-That's all you need to know about dynamic components for now, but once you've finished reading this page and feel comfortable with its content, we recommend coming back later to read the full guide on [Dynamic & Async Components](components-dynamic-async.html).
+Наразі це все, що вам потрібно знати про динамічне перемикання між компонентами, але коли ви прочитаєте і розберетесь з усією інформацією на цій сторінці, ми рекомендуємо повернутись і прочитати повне керівництво по [Динамічним і асинхронним компонентам](components-dynamic-async.html).
 
-## DOM Template Parsing Caveats
+## Особливості парсингу DOM-шаблона
 
-Some HTML elements, such as `<ul>`, `<ol>`, `<table>` and `<select>` have restrictions on what elements can appear inside them, and some elements such as `<li>`, `<tr>`, and `<option>` can only appear inside certain other elements.
+Деякі HTML елементи як то `<ul>`, `<ol>`, `<table>` та `<select>` мають обмеження щодо того, які елементи можуть з'являтися всередині них, а деякі елементи як то `<li>`, `<tr>`, та `<option>` можуть з'являтися лише всередині певних елементів.
 
-This will lead to issues when using components with elements that have such restrictions. For example:
+Це призводить до певних проблем при використанні компонентів, які містять такі елементи. Наприклад:
 
-``` html
+```html
 <table>
   <blog-post-row></blog-post-row>
 </table>
 ```
 
-The custom component `<blog-post-row>` will be hoisted out as invalid content, causing errors in the eventual rendered output. Fortunately, the `is` special attribute offers a workaround:
+Нестандартний компонент `<blog-post-row>` буде розглядатись як недійсний контент, спричиняючи помилки на кінцевому етапі відмальовування. На щастя, спеціальний атрибут `is` пропонує вихід:
 
-``` html
+```html
 <table>
   <tr is="blog-post-row"></tr>
 </table>
 ```
 
-It should be noted that **this limitation does _not_ apply if you are using string templates from one of the following sources**:
+Треба зазначити, що **ці обмеження __не застосовуються__ якщо ви використовуєте шаблони з одного із цих джерел**:
 
-- String templates (e.g. `template: '...'`)
-- [Single-file (`.vue`) components](single-file-components.html)
+- Строкові шаблони(наприклад `template: '...'`)
+- [Однофайлові (`.vue`) компоненти](single-file-components.html)
 - [`<script type="text/x-template">`](components-edge-cases.html#X-Templates)
 
-That's all you need to know about DOM template parsing caveats for now -- and actually, the end of Vue's _Essentials_. Congratulations! There's still more to learn, but first, we recommend taking a break to play with Vue yourself and build something fun.
+Наразі це все ще вам потрібно знати про особливості розбору DOM-шаблонів, і, власне, це завершення розділу _Основи_ Vue. Вітаємо. Є ще матеріал для вивчення, але спочатку ми рекомендуємо зробити невеличку перерву і спробувати трохи погратися з Vue, створивши щось цікаве самостійно.
 
-Once you feel comfortable with the knowledge you've just digested, we recommend coming back to read the full guide on [Dynamic & Async Components](components-dynamic-async.html), as well as the other pages in the Components In-Depth section of the sidebar.
+Коли ви будете впевнені, що засвоїли отримані знання, ми рекомендуємо повернутись і прочитати повний посібник по [Динамічним та асинхронним компонентам](components-dynamic-async.html), а також інші сторінки з розділу Компоненти поглиблено на боковій панелі.
