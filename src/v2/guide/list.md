@@ -171,7 +171,7 @@ new Vue({
     object: {
       title: 'Як зробити списки на Vue',
       author: 'Сергій Іванович',
-      publishedAt: '2020-09-11
+      publishedAt: '2020-09-11'
     }
   }
 })
@@ -199,7 +199,7 @@ new Vue({
     object: {
       title: 'Як зробити списки на Vue',
       author: 'Сергій Іванович',
-      publishedAt: '2020-09-11
+      publishedAt: '2020-09-11'
     }
   }
 })
