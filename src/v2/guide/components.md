@@ -119,7 +119,7 @@ Vue.component('button-counter2', {
   data: function () {
     return buttonCounter2Data
   },
-  template: '<button v-on:click="count++">Ви натисли на кнопку {{ count }} кількість разів.</button>'
+  template: '<button v-on:click="count++">Ви натиснули на кнопку {{ count }} кількість разів.</button>'
 })
 new Vue({ el: '#components-demo3' })
 </script>
