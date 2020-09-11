@@ -1,26 +1,27 @@
-# ua.vuejs.org
-Цей репозиторій містить переклад документації vuejs.org на українську мову.
-
 # vuejs.org
 
-Цей сайт збудовано за допомогою [hexo](http://hexo.io/). Вміст написаний у форматі Markdown, розміщенрму у теці `src`. Pull-реквести вітаються!
+This site is built with [hexo](http://hexo.io/). Site content is written in Markdown format located in `src`. Pull requests welcome!
 
-## Розробка
+## Writing
+
+See the [Vue Docs Writing Guide](https://github.com/vuejs/vuejs.org/blob/master/writing-guide.md) for our rules and recommendations on writing and maintaining documentation.
+
+## Developing
 
 ``` bash
 $ npm install
-$ npm start # сервер запущений як http://localhost:4000
+$ npm start # dev server at http://localhost:4000
 ```
 
-## Розгортання
+## Deploying
 
-Сайт автоматично розгортається по мірі створення нових комітів у гілці `master`, через [Netlify](https://www.netlify.com/).
+The site is automatically deployed when commits land in `master`, via [Netlify](https://www.netlify.com/).
 
-Якщо ви — мейнтейнер склонованого репозиторію для спільного перекладу та бажаєте розгортати сайт через Netlify замість GitHub сторінок, будь ласка, повідомте @yyx990803, створивши новий Github issue для отримання доступу до команди проекту в Netlify та оновлення DNS.
+If you are the maintainer of a community translation fork and would like to deploy via Netlify instead of GitHub pages, please ping @yyx990803 in an issue to request a Netlify team membership and DNS update.
 
-## В перекладі
+## On Translations
 
-Переклади для цієї документації на разі організовані в окремі репозиторії, які є клонами оригінального репозиторію.
+Translations for this documentation project are currently maintained in separate repositories forked from this original one.
 
 ### Arabic
 
@@ -103,11 +104,12 @@ Russian translation is maintained by Translation Gang.
 - [Pablo Kz](https://github.com/pabloKz)
 - [Leonardo Fagundez](https://github.com/lfgdzdev) | [Twitter](https://twitter.com/Lfgdz)
 
-### Українська
+### Ukrainian
 
-Український переклад здійснюється [Serhii Matrunchyk](https://github.com/matruncyk).
+Ukrainian translation is maintained by:
+- [Serhii Matrunchyk](https://github.com/matruncyk)
 
-Для швидкої комунікації використовуйте Телеграм канал [Vue.JS Ukraine](https://t.me/vuejs_ukraine).
+Please join a Telegram channel [Vue.JS Ukraine](https://t.me/vuejs_ukraine) in order to join to UA translators team.
 
 ### Vietnamese
 
@@ -116,8 +118,16 @@ Vietnamese translation is maintained by [Vue.js Vietnam User group](https://gith
 * Translation Repo: [/vuejs-vn/vuejs.org](https://github.com/vuejs-vn/vuejs.org)
 * Primary maintainer - [phanan](https://github.com/phanan)
 
-### Бажаєте допомогти з перекладом?
+### Bahasa Indonesia
 
-Якщо ви бажаєте долучитися до перекладу цієї документації, [напишіть нам](https://github.com/matrunchyk/ua.vuejs.org/issues) про це! Ми будемо дуже раді допомозі в цьому!
+Bahasa Indonesia translation is maintained by [Vue.js Indonesia](https://github.com/vuejs-id/).
 
-Дякуємо заздалегідь! ;)
+* Translation Repo: [/vuejs-id/docs](https://github.com/vuejs-id/docs)
+
+### Want to help with the translation?
+
+If you feel okay with translating quite alone, you can fork the repo, post a comment on the [Community Translation Announcements](https://github.com/vuejs/vuejs.org/issues/2015) issue page to inform others that you're doing the translation and go for it.
+
+If you are more of a team player, Translation Gang might be for you. Let us know somehow that you're ready to join this international open-source translators community. Feel free to contact [Grigoriy Beziuk](https://gbezyuk.github.io) or anybody else from [the team](https://github.com/orgs/translation-gang/people).
+
+And thank you in advance ;)

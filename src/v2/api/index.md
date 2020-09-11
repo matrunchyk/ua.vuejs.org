@@ -683,6 +683,7 @@ type: api
         handler: 'someMethod',
         immediate: true
       },
+      // you can pass array of callbacks, they will be called one-by-one
       e: [
         'handle1',
         function handle2 (val, oldVal) { /* ... */ },
@@ -1382,9 +1383,13 @@ type: api
 
 - **Read only**
 
+- **Reactive?** No
+
 - **Details:**
 
   Used to programmatically access content [distributed by slots](../guide/components.html#Content-Distribution-with-Slots). Each [named slot](../guide/components.html#Named-Slots) has its own corresponding property (e.g. the contents of `v-slot:foo` will be found at `vm.$slots.foo`). The `default` property contains either nodes not included in a named slot or contents of `v-slot:default`.
+
+  Please note that slots are **not** reactive. If you need a component to re-render based on changes to data passed to a slot, we suggest considering a different strategy that relies on a reactive instance option, such as `props` or `data`.
 
   **Note:** `v-slot:foo` is supported in v2.6+. For older versions, you can use the [deprecated syntax](../guide/components-slots.html#Deprecated-Syntax).
 
@@ -2377,7 +2382,7 @@ type: api
 
 ### key
 
-- **Expects:** `number | string`
+- **Expects:** `number | string | boolean (since 2.4.2) | symbol (since 2.5.12)`
 
   The `key` special attribute is primarily used as a hint for Vue's virtual DOM algorithm to identify VNodes when diffing the new list of nodes against the old list. Without keys, Vue uses an algorithm that minimizes element movement and tries to patch/reuse elements of the same type in-place as much as possible. With keys, it will reorder elements based on the order change of keys, and elements with keys that are no longer present will always be removed/destroyed.
 
@@ -2592,7 +2597,7 @@ Used to denote a `<template>` element as a scoped slot.
 
   `<transition-group>` serve as transition effects for **multiple** elements/components. The `<transition-group>` renders a real DOM element. By default it renders a `<span>`, and you can configure what element it should render via the `tag` attribute.
 
-  Note every child in a `<transition-group>` must be **uniquely keyed** for the animations to work properly.
+  Note that every child in a `<transition-group>` must be **uniquely keyed** for the animations to work properly.
 
   `<transition-group>` supports moving transitions via CSS transform. When a child's position on screen has changed after an update, it will get applied a moving CSS class (auto generated from the `name` attribute or configured with the `move-class` attribute). If the CSS `transform` property is "transition-able" when the moving class is applied, the element will be smoothly animated to its destination using the [FLIP technique](https://aerotwist.com/blog/flip-your-animations/).
 
