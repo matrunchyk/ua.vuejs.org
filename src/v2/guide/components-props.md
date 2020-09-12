@@ -87,33 +87,33 @@ props: {
 ### Передача булевого значення
 
 ```html
-<!-- Including the prop with no value will imply `true`. -->
+<!-- Додавання булевого вхідного параметру без значення означатиме булеве значення `true`. -->
 <blog-post is-published></blog-post>
 
-<!-- Even though `false` is static, we need v-bind to tell Vue that -->
-<!-- this is a JavaScript expression rather than a string.          -->
+<!-- Хоча `false` і статичне, ми повинні використовувати v-bind, щоб вказати Vue, що -->
+<!-- це є виразом JavaScript, а не рядкове значення. -->
 <blog-post v-bind:is-published="false"></blog-post>
 
-<!-- Dynamically assign to the value of a variable. -->
+<!-- Динамічна передача значення через змінну. -->
 <blog-post v-bind:is-published="post.isPublished"></blog-post>
 ```
 
-### Passing an Array
+### Передача масиву
 
 ```html
-<!-- Even though the array is static, we need v-bind to tell Vue that -->
-<!-- this is a JavaScript expression rather than a string.            -->
+<!-- Хоча масив і статичний, ми повинні використовувати v-bind, щоб вказати Vue, що -->
+<!-- це є виразом JavaScript, а не рядкове значення. -->
 <blog-post v-bind:comment-ids="[234, 266, 273]"></blog-post>
 
-<!-- Dynamically assign to the value of a variable. -->
+<!-- Динамічна передача значення через змінну. -->
 <blog-post v-bind:comment-ids="post.commentIds"></blog-post>
 ```
 
-### Passing an Object
+### Передача об'єкту
 
 ```html
-<!-- Even though the object is static, we need v-bind to tell Vue that -->
-<!-- this is a JavaScript expression rather than a string.             -->
+<!-- Хоча об'єкт і статичний, ми повинні використовувати v-bind, щоб вказати Vue, що -->
+<!-- це є виразом JavaScript, а не рядкове значення. -->
 <blog-post
   v-bind:author="{
     name: 'Veronica',
@@ -121,28 +121,28 @@ props: {
   }"
 ></blog-post>
 
-<!-- Dynamically assign to the value of a variable. -->
+<!-- Динамічна передача значення через змінну. -->
 <blog-post v-bind:author="post.author"></blog-post>
 ```
 
-### Passing the Properties of an Object
+### Передача властивостей об'єкту
 
-If you want to pass all the properties of an object as props, you can use `v-bind` without an argument (`v-bind` instead of `v-bind:prop-name`). For example, given a `post` object:
+Якщо ви хотіли б передати всі властивості об'єкту, як вхідні параметри, ви можете скористатися `v-bind` без аргументу (`v-bind` замість `v-bind:prop-name`). Для прикладу, в нас є об'єкт `post`:
 
 ``` js
 post: {
   id: 1,
-  title: 'My Journey with Vue'
+  title: 'Мій шлях з Vue'
 }
 ```
 
-The following template:
+Наступний шаблон:
 
 ``` html
 <blog-post v-bind="post"></blog-post>
 ```
 
-Will be equivalent to:
+Еквівалентний наступному:
 
 ``` html
 <blog-post
@@ -151,13 +151,13 @@ Will be equivalent to:
 ></blog-post>
 ```
 
-## One-Way Data Flow
+## Односторонній перебіг даних
 
-All props form a **one-way-down binding** between the child property and the parent one: when the parent property updates, it will flow down to the child, but not the other way around. This prevents child components from accidentally mutating the parent's state, which can make your app's data flow harder to understand.
+Всі вхідні параметри формують **односторонній зв'язок** між дочірніми властивостями та батьківським: коли батьківська властивість змінюється, це перейде вниз аж до дочірніх, але не навпаки. Це запобігає дочірні компоненти випадково мутувати стан батьківських, щоб могло б зробити перебіг даних вашого застосунку складнішим для розуміння.
 
-In addition, every time the parent component is updated, all props in the child component will be refreshed with the latest value. This means you should **not** attempt to mutate a prop inside a child component. If you do, Vue will warn you in the console.
+Крім того, щоразу, коли батьківський компонент оновлено, всі вхідні параметри дочірнього компоненту будуть оновлені автоматично новими значеннями. Це означає, що ви **не** повинні намагатися мутувати вхідний параметр усередині дочірньої компоненти. Якщо ж ви спробуєте це зробити, Vue попередить вас в консолі розробника.
 
-There are usually two cases where it's tempting to mutate a prop:
+Як правило, існує два випадки, де хочеться змінити вхідний параметр:
 
 1. **The prop is used to pass in an initial value; the child component wants to use it as a local data property afterwards.** In this case, it's best to define a local data property that uses the prop as its initial value:
 
