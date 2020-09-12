@@ -4,38 +4,38 @@ type: guide
 order: 102
 ---
 
-> This page assumes you've already read the [Components Basics](components.html). Read that first if you are new to components.
+> Цей розділ передбачає ваше розуміння [базових знань компонентів](components.html). Прочитайте його перед тим, як знайомитися з цим розділом.
 
-<div class="vueschool"><a href="https://vueschool.io/lessons/reusable-components-with-props?friend=vuejs" target="_blank" rel="sponsored noopener" title="Learn how component props work with Vue School">Learn how component props work with a free lesson on Vue School</a></div>
+<div class="vueschool"><a href="https://vueschool.io/lessons/reusable-components-with-props?friend=vuejs" target="_blank" rel="sponsored noopener" title="Дізнайтеся, як працюють вхідні параметри у Vue School">Дізнайтеся, як працюють вхідні параметри на безкоштовному уроці у Vue School</a></div>
 
-## Prop Casing (camelCase vs kebab-case)
+## Регістр вхідних параметрів (camelCase чи kebab-case)
 
-HTML attribute names are case-insensitive, so browsers will interpret any uppercase characters as lowercase. That means when you're using in-DOM templates, camelCased prop names need to use their kebab-cased (hyphen-delimited) equivalents:
+Імена HTML атрибутів не залежать від регістру, тому браузери розумітимуть будь-які символи ви верхньому регістрі як символи в нижньому. Це означає, що коли ви використовуєте шаблони, створені як частина DOM, імена властивостей, написані в стилі camelCase мають бути використані їхні kebab-case еквіваленти (розділені через дефіс):
 
 ``` js
 Vue.component('blog-post', {
-  // camelCase in JavaScript
+  // camelCase в JavaScript
   props: ['postTitle'],
   template: '<h3>{{ postTitle }}</h3>'
 })
 ```
 
 ``` html
-<!-- kebab-case in HTML -->
+<!-- kebab-case в HTML -->
 <blog-post post-title="hello!"></blog-post>
 ```
 
-Again, if you're using string templates, this limitation does not apply.
+Знову ж таки, ці обмеження не впливають, якщо ви використовуєте рядкові шаблони.
 
-## Prop Types
+## Типи вхідних параметрів
 
-So far, we've only seen props listed as an array of strings:
+До цього моменту, ми тільки розглядали вхідні параметри, перелічені як масив рядкових величин:
 
 ```js
 props: ['title', 'likes', 'isPublished', 'commentIds', 'author']
 ```
 
-Usually though, you'll want every prop to be a specific type of value. In these cases, you can list props as an object, where the properties' names and values contain the prop names and types, respectively:
+Проте, зазвичай ви б хотіли, щоб кожен вхідний параметр мав якийсь специфічний тип очікуваного значення. В таких випадках ви можете перелічити вхідні параметри у вигляді об'єкту, де імена його властивостей та значень матимуть відповідно їхні імена та їхні типи:
 
 ```js
 props: {
@@ -45,46 +45,46 @@ props: {
   commentIds: Array,
   author: Object,
   callback: Function,
-  contactsPromise: Promise // or any other constructor
+  contactsPromise: Promise // або будь-який інший конструктор
 }
 ```
 
-This not only documents your component, but will also warn users in the browser's JavaScript console if they pass the wrong type. You'll learn much more about [type checks and other prop validations](#Prop-Validation) further down this page.
+Це не лише документує ваш компонент, але також попередить користувачів в консолі JavaScript браузера, якщо вони передадуть невірний тип. Ви дізнаєтесь більше про [перевірку типів та іншу валідацію вхідних параметрів](#Валідація-вхідних-параметрів) на цій сторінці трохи нижче.
 
-## Passing Static or Dynamic Props
+## Передача статичних або динамічних вхідних параметрів
 
-So far, you've seen props passed a static value, like in:
+До цього моменту, ви тільки спостерігали за вхідними параметрами, переданими як статичне значення, наприклад:
 
 ```html
-<blog-post title="My journey with Vue"></blog-post>
+<blog-post title="Мій шлях з Vue"></blog-post>
 ```
 
-You've also seen props assigned dynamically with `v-bind`, such as in:
+Ми також бачили вхідні параметри, передані динамічно за допомогою `v-bind`, як в наступному прикладі:
 
 ```html
-<!-- Dynamically assign the value of a variable -->
+<!-- Динамічна передача значення через змінну -->
 <blog-post v-bind:title="post.title"></blog-post>
 
-<!-- Dynamically assign the value of a complex expression -->
+<!-- Динамічне передача значення через складний вираз -->
 <blog-post
-  v-bind:title="post.title + ' by ' + post.author.name"
+  v-bind:title="post.title + ', автор: ' + post.author.name"
 ></blog-post>
 ```
 
-In the two examples above, we happen to pass string values, but _any_ type of value can actually be passed to a prop.
+В цих двох прикладах, що зверху, нам вдавалося передавати рядкові значення, але насправді _будь-які_ типи значення можуть передані до вхідного параметра.
 
-### Passing a Number
+### Передача числа
 
 ```html
-<!-- Even though `42` is static, we need v-bind to tell Vue that -->
-<!-- this is a JavaScript expression rather than a string.       -->
+<!-- Хоч `42` є статичним, ми повинні використовувати v-bind, щоб вказати Vue, що -->
+<!-- це є виразом JavaScript, а не рядкове значення. -->
 <blog-post v-bind:likes="42"></blog-post>
 
-<!-- Dynamically assign to the value of a variable. -->
+<!-- Динамічна передача значення через змінну. -->
 <blog-post v-bind:likes="post.likes"></blog-post>
 ```
 
-### Passing a Boolean
+### Передача булевого значення
 
 ```html
 <!-- Including the prop with no value will imply `true`. -->
