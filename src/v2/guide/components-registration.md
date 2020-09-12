@@ -4,29 +4,29 @@ type: guide
 order: 101
 ---
 
-> This page assumes you've already read the [Components Basics](components.html). Read that first if you are new to components.
+> Цей розділ передбачає ваше розуміння [базових знань компонентів](components.html). Прочитайте його перед тим, як знайомитися з цим розділом.
 
-<div class="vueschool"><a href="https://vueschool.io/lessons/global-vs-local-components?friend=vuejs" target="_blank" rel="sponsored noopener" title="Free Vue.js Component Registration lesson">Watch a free video lesson on Vue School</a></div>
+<div class="vueschool"><a href="https://vueschool.io/lessons/global-vs-local-components?friend=vuejs" target="_blank" rel="sponsored noopener" title="Дізнайтеся про реєстрацію компонентів у Vue School">Дізнайтеся про реєстрацію компонентів на безкоштовному уроці у Vue School</a></div>
 
-## Component Names
+## Ім'я компонентів
 
-When registering a component, it will always be given a name. For example, in the global registration we've seen so far:
+При реєстрації компонента, їй завжди дається певне ім'я. Для прикладу, при глобальній реєстрації ми поки помічали наступне:
 
 ```js
 Vue.component('my-component-name', { /* ... */ })
 ```
 
-The component's name is the first argument of `Vue.component`.
+Тут ім'я компонента — перший аргумент функції `Vue.component`.
 
-The name you give a component may depend on where you intend to use it. When using a component directly in the DOM (as opposed to in a string template or [single-file component](single-file-components.html)), we strongly recommend following the [W3C rules](https://html.spec.whatwg.org/multipage/custom-elements.html#valid-custom-element-name) for custom tag names (all-lowercase, must contain a hyphen). This helps you avoid conflicts with current and future HTML elements.
+Ім'я, яке ви дасте компоненту залежатиме від того, як ви його хочете використовувати. При використанні компонента безпосередньо в DOM (на противагу використання в рядковому шаблон або [однофайлового компоненту](single-file-components.html)), ми настійно рекомендуємо слідувати [правил W3C](https://html.spec.whatwg.org/multipage/custom-elements.html#valid-custom-element-name) для своїх власних імен тегів (всі у нижньому регістрі, повинні містити дефіс). Це допоможе уникати можливих конфліктів з наявними та майбутніми елементами HTML.
 
-You can see other recommendations for component names in the [Style Guide](../style-guide/#Base-component-names-strongly-recommended).
+Ви також можете побачити інші рекомендації щодо правильності написання імен компонентів в [посібнику по стилях](../style-guide/#Імена-базових-компонент-настійно-рекомендовано
 
-### Name Casing
+### Регістри імен
 
-You have two options when defining component names:
+У вас є два способи оголошення імен компонентів:
 
-#### With kebab-case
+#### В стилі kebab-case
 
 ```js
 Vue.component('my-component-name', { /* ... */ })
@@ -34,7 +34,7 @@ Vue.component('my-component-name', { /* ... */ })
 
 When defining a component with kebab-case, you must also use kebab-case when referencing its custom element, such as in `<my-component-name>`.
 
-#### With PascalCase
+#### В стилі PascalCase
 
 ```js
 Vue.component('MyComponentName', { /* ... */ })

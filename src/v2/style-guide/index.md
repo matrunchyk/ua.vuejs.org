@@ -92,7 +92,7 @@ When using the `data` property on a component (i.e. anywhere except on `new Vue`
 {% raw %}
 <details>
 <summary>
-  <h4>Detailed Explanation</h4>
+  <h4>Детальне пояснення</h4>
 </summary>
 {% endraw %}
 
@@ -185,7 +185,7 @@ In committed code, prop definitions should always be as detailed as possible, sp
 {% raw %}
 <details>
 <summary>
-  <h4>Detailed Explanation</h4>
+  <h4>Детальне пояснення</h4>
 </summary>
 {% endraw %}
 
@@ -244,7 +244,7 @@ props: {
 {% raw %}
 <details>
 <summary>
-  <h4>Detailed Explanation</h4>
+  <h4>Детальне пояснення</h4>
 </summary>
 {% endraw %}
 
@@ -317,7 +317,7 @@ There are two common cases where this can be tempting:
 {% raw %}
 <details>
 <summary>
-  <h4>Detailed Explanation</h4>
+  <h4>Детальне пояснення</h4>
 </summary>
 {% endraw %}
 
@@ -476,7 +476,7 @@ This makes overriding internal styles easier, with human-readable class names th
 {% raw %}
 <details>
 <summary>
-  <h4>Detailed Explanation</h4>
+  <h4>Детальне пояснення</h4>
 </summary>
 {% endraw %}
 
@@ -569,7 +569,7 @@ Beyond the `scoped` attribute, using unique class names can help ensure that 3rd
 {% raw %}
 <details>
 <summary>
-  <h4>Detailed Explanation</h4>
+  <h4>Детальне пояснення</h4>
 </summary>
 {% endraw %}
 
@@ -744,14 +744,14 @@ components/
 
 
 
-### Base component names <sup data-p="b">настійно рекомендовано</sup>
+### Імена базових компонент <sup data-p="b">настійно рекомендовано</sup>
 
-**Base components (a.k.a. presentational, dumb, or pure components) that apply app-specific styling and conventions should all begin with a specific prefix, such as `Base`, `App`, or `V`.**
+**Базові компоненти (також знані як презентаційні, німі, або чисті компоненти), які містять стилістку та конвенції додатку, повинні всі починатися зі специфічного префіксу, як, наприклад, `Base`, `App`, або `V`.**
 
 {% raw %}
 <details>
 <summary>
-  <h4>Detailed Explanation</h4>
+  <h4>Детальне пояснення</h4>
 </summary>
 {% endraw %}
 
@@ -864,7 +864,7 @@ If a component only makes sense in the context of a single parent component, tha
 {% raw %}
 <details>
 <summary>
-  <h4>Detailed Explanation</h4>
+  <h4>Детальне пояснення</h4>
 </summary>
 {% endraw %}
 
@@ -940,7 +940,7 @@ components/
 {% raw %}
 <details>
 <summary>
-  <h4>Detailed Explanation</h4>
+  <h4>Детальне пояснення</h4>
 </summary>
 {% endraw %}
 
@@ -1121,7 +1121,7 @@ OR
 {% raw %}
 <details>
 <summary>
-  <h4>Detailed Explanation</h4>
+  <h4>Детальне пояснення</h4>
 </summary>
 {% endraw %}
 
@@ -1341,7 +1341,7 @@ computed: {
 {% raw %}
 <details>
 <summary>
-  <h4>Detailed Explanation</h4>
+  <h4>Детальне пояснення</h4>
 </summary>
 {% endraw %}
 
@@ -1800,7 +1800,7 @@ Prefer class selectors over element selectors in `scoped` styles, because large 
 {% raw %}
 <details>
 <summary>
-  <h4>Detailed Explanation</h4>
+  <h4>Детальне пояснення</h4>
 </summary>
 {% endraw %}
 
