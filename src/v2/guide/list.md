@@ -342,10 +342,9 @@ methods: {
 
 ## `v-for` with `v-if`
 
-<p class="tip">Варто зазначити, що **не** рекомендується використовувати `v-if` разом з `v-for`. Зверніться до [style guide](/v2/style-guide/#Avoid-v-if-with-v-for-essential) for details.</p>
-<p class="tip">Note that it's **not** recommended to use `v-if` and `v-for` together. Refer to [style guide](/v2/style-guide/#Avoid-v-if-with-v-for-essential) for details.</p>
+<p class="tip">Варто зазначити, що **не** рекомендується використовувати `v-if` разом з `v-for`. Зверніться до [style guide](/v2/style-guide/#Уникайте-v-if-з-v-for-суттєво) для деталей.</p>
 
-When they exist on the same node, `v-for` has a higher priority than `v-if`. That means the `v-if` will be run on each iteration of the loop separately. This can be useful when you want to render nodes for only _some_ items, like below:
+Впівіснуючи на тому ж елементі, `v-for` має вищий пріоритет, ніж `v-if`. Це означає, що `v-if` буде виконаний на кожній окремій ітерації циклу. Це може бути корисно, коли ви хочете відмальовувати елементи для _лише_ деяких елементів, як у прикладі нижче:
 
 ``` html
 <li v-for="todo in todos" v-if="!todo.isComplete">
@@ -353,9 +352,9 @@ When they exist on the same node, `v-for` has a higher priority than `v-if`. Tha
 </li>
 ```
 
-The above only renders the todos that are not complete.
+Код, що вище, відмальовує лише не виконані елементи завдань.
 
-If instead, your intent is to conditionally skip execution of the loop, you can place the `v-if` on a wrapper element (or [`<template>`](conditional.html#Conditional-Groups-with-v-if-on-lt-template-gt)). For example:
+Якщо навпаки — вашим наміром є пропустити виконання циклу за певною умовою, ви можете розмістити `v-if` на елементі-обгортці (або [`<template>`](conditional.html#Умовні-групи-з-v-if-в-lt-template-gt)). Приклад:
 
 ``` html
 <ul v-if="todos.length">
@@ -363,22 +362,22 @@ If instead, your intent is to conditionally skip execution of the loop, you can 
     {{ todo }}
   </li>
 </ul>
-<p v-else>No todos left!</p>
+<p v-else>Більше немає завдань!</p>
 ```
 
-## `v-for` with a Component
+## `v-for` з компонентами
 
-> This section assumes knowledge of [Components](components.html). Feel free to skip it and come back later.
+> Цей розділ вимагає знання [Компонентів](components.html). Ви можете пропустити його та повернутися до нього пізніше.
 
-You can directly use `v-for` on a custom component, like any normal element:
+Ви можете безпосередньо використовувати `v-for` на власних компонентах, як на будь-яких інших елементах:
 
 ``` html
 <my-component v-for="item in items" :key="item.id"></my-component>
 ```
 
-> In 2.2.0+, when using `v-for` with a component, a [`key`](list.html#key) is now required.
+> Починаючи з 2.2.0+, при використанні `v-for` з компонентами, атрибут [`key`](list.html#key) є обов'язковим.
 
-However, this won't automatically pass any data to the component, because components have isolated scopes of their own. In order to pass the iterated data into the component, we should also use props:
+Разом з тим, це не передасть автоматично ніяких даних до компонента, оскільки області видимості компонентів ізольована сама по собі. Для того, щоб передавати дані, які приймають участь в ітерації до компоненту, ми повинні також використовувати вхідні параметри:
 
 ``` html
 <my-component
@@ -389,20 +388,20 @@ However, this won't automatically pass any data to the component, because compon
 ></my-component>
 ```
 
-The reason for not automatically injecting `item` into the component is because that makes the component tightly coupled to how `v-for` works. Being explicit about where its data comes from makes the component reusable in other situations.
+Причина такої не автоматичної передачі `item` до компоненту — тому що це зробило б компоненту тісно зв'язаною суто з тим, як працює `v-for`. Явно вказуючи те, звідки та як приходять дані, робить її повторно використовуваною для інших ситуацій.
 
-Here's a complete example of a simple todo list:
+До вашої уваги повний приклад для простого списку задач:
 
 ``` html
 <div id="todo-list-example">
   <form v-on:submit.prevent="addNewTodo">
-    <label for="new-todo">Add a todo</label>
+    <label for="new-todo">Додати задачу</label>
     <input
       v-model="newTodoText"
       id="new-todo"
-      placeholder="E.g. Feed the cat"
+      placeholder="Приклад: Нагодувати кота"
     >
-    <button>Add</button>
+    <button>Додати</button>
   </form>
   <ul>
     <li
@@ -416,14 +415,14 @@ Here's a complete example of a simple todo list:
 </div>
 ```
 
-<p class="tip">Note the `is="todo-item"` attribute. This is necessary in DOM templates, because only an `<li>` element is valid inside a `<ul>`. It does the same thing as `<todo-item>`, but works around a potential browser parsing error. See [DOM Template Parsing Caveats](components.html#DOM-Template-Parsing-Caveats) to learn more.</p>
+<p class="tip">Зверніть увагу на атрибут `is="todo-item"`. Це робити необхідно в шаблонах DOM, оскільки елемент `<li>` дійсний лише в `<ul>`. Він робить таке ж, як і `<todo-item>`, але уникає потенційних помилок розбору шаблону браузером. Перегляньте [Застереження щодо розбору DOM-шаблону](components.html#Застереження-щодо-розбору-DOM-шаблону) для деталей.</p>
 
 ``` js
 Vue.component('todo-item', {
   template: '\
     <li>\
       {{ title }}\
-      <button v-on:click="$emit(\'remove\')">Remove</button>\
+      <button v-on:click="$emit(\'remove\')">Видалити</button>\
     </li>\
   ',
   props: ['title']
@@ -436,15 +435,15 @@ new Vue({
     todos: [
       {
         id: 1,
-        title: 'Do the dishes',
+        title: 'Помити посуд',
       },
       {
         id: 2,
-        title: 'Take out the trash',
+        title: 'Викинути сміття',
       },
       {
         id: 3,
-        title: 'Mow the lawn'
+        title: 'Покосити траву'
       }
     ],
     nextTodoId: 4
@@ -464,13 +463,13 @@ new Vue({
 {% raw %}
 <div id="todo-list-example" class="demo">
   <form v-on:submit.prevent="addNewTodo">
-    <label for="new-todo">Add a todo</label>
+    <label for="new-todo">Додати задачу</label>
     <input
       v-model="newTodoText"
       id="new-todo"
-      placeholder="E.g. Feed the cat"
+      placeholder="Приклад: Нагодувати кота"
     >
-    <button>Add</button>
+    <button>Додати</button>
   </form>
   <ul>
     <li
@@ -487,7 +486,7 @@ Vue.component('todo-item', {
   template: '\
     <li>\
       {{ title }}\
-      <button v-on:click="$emit(\'remove\')">Remove</button>\
+      <button v-on:click="$emit(\'remove\')">Видалити</button>\
     </li>\
   ',
   props: ['title']
@@ -500,15 +499,15 @@ new Vue({
     todos: [
       {
         id: 1,
-        title: 'Do the dishes',
+        title: 'Помити посуд',
       },
       {
         id: 2,
-        title: 'Take out the trash',
+        title: 'Викинути сміття',
       },
       {
         id: 3,
-        title: 'Mow the lawn'
+        title: 'Покосити траву'
       }
     ],
     nextTodoId: 4
