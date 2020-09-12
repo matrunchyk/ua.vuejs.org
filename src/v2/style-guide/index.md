@@ -13,17 +13,17 @@ Finally, we've split rules into four categories:
 
 
 
-## Rule Categories
+## Категорії правил
 
-### Priority A: Essential
+### Пріоритет A: Суттєво
 
 These rules help prevent errors, so learn and abide by them at all costs. Exceptions may exist, but should be very rare and only be made by those with expert knowledge of both JavaScript and Vue.
 
-### Priority B: Strongly Recommended
+### Пріоритет B: Настійно рекомендовано
 
 These rules have been found to improve readability and/or developer experience in most projects. Your code will still run if you violate them, but violations should be rare and well-justified.
 
-### Priority C: Recommended
+### Пріоритет C: Рекомендовано
 
 Where multiple, equally good options exist, an arbitrary choice can be made to ensure consistency. In these rules, we describe each acceptable option and suggest a default choice. That means you can feel free to make a different choice in your own codebase, as long as you're consistent and have a good reason. Please do have a good reason though! By adapting to the community standard, you will:
 
@@ -31,17 +31,17 @@ Where multiple, equally good options exist, an arbitrary choice can be made to e
 2. be able to copy and paste most community code examples without modification
 3. often find new hires are already accustomed to your preferred coding style, at least in regards to Vue
 
-### Priority D: Use with Caution
+### Пріоритет D: Використовувати з обережністю
 
 Some features of Vue exist to accommodate rare edge cases or smoother migrations from a legacy code base. When overused however, they can make your code more difficult to maintain or even become a source of bugs. These rules shine a light on potentially risky features, describing when and why they should be avoided.
 
 
 
-## Priority A Rules: Essential (Error Prevention)
+## Правила Пріоритету A: Суттєво (Запобігання помилок)
 
 
 
-### Multi-word component names <sup data-p="a">essential</sup>
+### Multi-word component names <sup data-p="a">суттєво</sup>
 
 **Component names should always be multi-word, except for root `App` components, and built-in components provided by Vue, such as `<transition>` or `<component>`.**
 
@@ -83,7 +83,7 @@ export default {
 
 
 
-### Component data <sup data-p="a">essential</sup>
+### Component data <sup data-p="a">суттєво</sup>
 
 **Component `data` must be a function.**
 
@@ -176,7 +176,7 @@ new Vue({
 
 
 
-### Prop definitions <sup data-p="a">essential</sup>
+### Prop definitions <sup data-p="a">суттєво</sup>
 
 **Prop definitions should be as detailed as possible.**
 
@@ -235,7 +235,7 @@ props: {
 
 
 
-### Keyed `v-for` <sup data-p="a">essential</sup>
+### Keyed `v-for` <sup data-p="a">суттєво</sup>
 
 **Always use `key` with `v-for`.**
 
@@ -304,7 +304,7 @@ In our experience, it's better to _always_ add a unique key, so that you and you
 
 
 
-### Avoid `v-if` with `v-for` <sup data-p="a">essential</sup>
+### Уникайте `v-if` з `v-for` <sup data-p="a">суттєво</sup>
 
 **Never use `v-if` on the same element as `v-for`.**
 
@@ -463,7 +463,7 @@ By moving the `v-if` to a container element, we're no longer checking `shouldSho
 
 
 
-### Component style scoping <sup data-p="a">essential</sup>
+### Component style scoping <sup data-p="a">суттєво</sup>
 
 **For applications, styles in a top-level `App` component and in layout components may be global, but all other components should always be scoped.**
 
@@ -562,7 +562,7 @@ Beyond the `scoped` attribute, using unique class names can help ensure that 3rd
 
 
 
-### Private property names <sup data-p="a">essential</sup>
+### Private property names <sup data-p="a">суттєво</sup>
 
 **Use module scoping to keep private functions inaccessible from the outside. If that's not possible, always use the `$_` prefix for custom private properties in a plugin, mixin, etc that should not be considered public API. Then to avoid conflicts with code by other authors, also include a named scope (e.g. `$_yourPluginName_`).**
 
@@ -666,11 +666,11 @@ export default myGreatMixin
 
 
 
-## Priority B Rules: Strongly Recommended (Improving Readability)
+## Правила пріоритету B: Настійно рекомендовано (Покращення читабельності)
 
 
 
-### Component files <sup data-p="b">strongly recommended</sup>
+### Component files <sup data-p="b">настійно рекомендовано</sup>
 
 **Whenever a build system is available to concatenate files, each component should be in its own file.**
 
@@ -708,7 +708,7 @@ components/
 
 
 
-### Single-file component filename casing <sup data-p="b">strongly recommended</sup>
+### Single-file component filename casing <sup data-p="b">настійно рекомендовано</sup>
 
 **Filenames of [single-file components](../guide/single-file-components.html) should either be always PascalCase or always kebab-case.**
 
@@ -744,7 +744,7 @@ components/
 
 
 
-### Base component names <sup data-p="b">strongly recommended</sup>
+### Base component names <sup data-p="b">настійно рекомендовано</sup>
 
 **Base components (a.k.a. presentational, dumb, or pure components) that apply app-specific styling and conventions should all begin with a specific prefix, such as `Base`, `App`, or `V`.**
 
@@ -827,7 +827,7 @@ components/
 
 
 
-### Single-instance component names <sup data-p="b">strongly recommended</sup>
+### Single-instance component names <sup data-p="b">настійно рекомендовано</sup>
 
 **Components that should only ever have a single active instance should begin with the `The` prefix, to denote that there can be only one.**
 
@@ -855,7 +855,7 @@ components/
 
 
 
-### Tightly coupled component names <sup data-p="b">strongly recommended</sup>
+### Tightly coupled component names <sup data-p="b">настійно рекомендовано</sup>
 
 **Child components that are tightly coupled with their parent should include the parent component name as a prefix.**
 
@@ -933,7 +933,7 @@ components/
 
 
 
-### Order of words in component names <sup data-p="b">strongly recommended</sup>
+### Order of words in component names <sup data-p="b">настійно рекомендовано</sup>
 
 **Component names should start with the highest-level (often most general) words and end with descriptive modifying words.**
 
@@ -1020,7 +1020,7 @@ components/
 
 
 
-### Self-closing components <sup data-p="b">strongly recommended</sup>
+### Self-closing components <sup data-p="b">настійно рекомендовано</sup>
 
 **Components with no content should be self-closing in [single-file components](../guide/single-file-components.html), string templates, and [JSX](../guide/render-function.html#JSX) - but never in DOM templates.**
 
@@ -1058,7 +1058,7 @@ Unfortunately, HTML doesn't allow custom elements to be self-closing - only [off
 
 
 
-### Component name casing in templates <sup data-p="b">strongly recommended</sup>
+### Component name casing in templates <sup data-p="b">настійно рекомендовано</sup>
 
 **In most projects, component names should always be PascalCase in [single-file components](../guide/single-file-components.html) and string templates - but kebab-case in DOM templates.**
 
@@ -1114,7 +1114,7 @@ OR
 
 
 
-### Component name casing in JS/JSX <sup data-p="b">strongly recommended</sup>
+### Component name casing in JS/JSX <sup data-p="b">настійно рекомендовано</sup>
 
 **Component names in JS/[JSX](../guide/render-function.html#JSX) should always be PascalCase, though they may be kebab-case inside strings for simpler applications that only use global component registration through `Vue.component`.**
 
@@ -1191,7 +1191,7 @@ export default {
 
 
 
-### Full-word component names <sup data-p="b">strongly recommended</sup>
+### Full-word component names <sup data-p="b">настійно рекомендовано</sup>
 
 **Component names should prefer full words over abbreviations.**
 
@@ -1219,7 +1219,7 @@ components/
 
 
 
-### Prop name casing <sup data-p="b">strongly recommended</sup>
+### Prop name casing <sup data-p="b">настійно рекомендовано</sup>
 
 **Prop names should always use camelCase during declaration, but kebab-case in templates and [JSX](../guide/render-function.html#JSX).**
 
@@ -1255,7 +1255,7 @@ props: {
 
 
 
-### Multi-attribute elements <sup data-p="b">strongly recommended</sup>
+### Multi-attribute elements <sup data-p="b">настійно рекомендовано</sup>
 
 **Elements with multiple attributes should span multiple lines, with one attribute per line.**
 
@@ -1294,7 +1294,7 @@ In JavaScript, splitting objects with multiple properties over multiple lines is
 
 
 
-### Simple expressions in templates <sup data-p="b">strongly recommended</sup>
+### Simple expressions in templates <sup data-p="b">настійно рекомендовано</sup>
 
 **Component templates should only include simple expressions, with more complex expressions refactored into computed properties or methods.**
 
@@ -1334,7 +1334,7 @@ computed: {
 
 
 
-### Simple computed properties <sup data-p="b">strongly recommended</sup>
+### Simple computed properties <sup data-p="b">настійно рекомендовано</sup>
 
 **Complex computed properties should be split into as many simpler properties as possible.**
 
@@ -1399,7 +1399,7 @@ computed: {
 
 
 
-### Quoted attribute values <sup data-p="b">strongly recommended</sup>
+### Quoted attribute values <sup data-p="b">настійно рекомендовано</sup>
 
 **Non-empty HTML attribute values should always be inside quotes (single or double, whichever is not used in JS).**
 
@@ -1431,7 +1431,7 @@ While attribute values without any spaces are not required to have quotes in HTM
 
 
 
-### Directive shorthands <sup data-p="b">strongly recommended</sup>
+### Directive shorthands <sup data-p="b">настійно рекомендовано</sup>
 
 **Directive shorthands (`:` for `v-bind:`, `@` for `v-on:` and `#` for `v-slot`) should be used always or never.**
 
@@ -1518,11 +1518,11 @@ While attribute values without any spaces are not required to have quotes in HTM
 
 
 
-## Priority C Rules: Recommended (Minimizing Arbitrary Choices and Cognitive Overhead)
+## Правила пріоритету C: Рекомендовано (Мінімізація довільного використання та когнітивного навантаження)
 
 
 
-### Component/instance options order <sup data-p="c">recommended</sup>
+### Component/instance options order <sup data-p="c">рекомендовано</sup>
 
 **Component/instance options should be ordered consistently.**
 
@@ -1583,7 +1583,7 @@ This is the default order we recommend for component options. They're split into
 
 
 
-### Element attribute order <sup data-p="c">recommended</sup>
+### Element attribute order <sup data-p="c">рекомендовано</sup>
 
 **The attributes of elements (including components) should be ordered consistently.**
 
@@ -1627,7 +1627,7 @@ This is the default order we recommend for component options. They're split into
 
 
 
-### Empty lines in component/instance options <sup data-p="c">recommended</sup>
+### Empty lines in component/instance options <sup data-p="c">рекомендовано</sup>
 
 **You may want to add one empty line between multi-line properties, particularly if the options can no longer fit on your screen without scrolling.**
 
@@ -1691,7 +1691,7 @@ computed: {
 
 
 
-### Single-file component top-level element order <sup data-p="c">recommended</sup>
+### Single-file component top-level element order <sup data-p="c">рекомендовано</sup>
 
 **[Single-file components](../guide/single-file-components.html) should always order `<script>`, `<template>`, and `<style>` tags consistently, with `<style>` last, because at least one of the other two is always necessary.**
 
@@ -1747,11 +1747,11 @@ computed: {
 
 
 
-## Priority D Rules: Use with Caution (Potentially Dangerous Patterns)
+## Правила пріоритету D: Використовувати з обережністю (Потенційно небезпечні cхеми)
 
 
 
-### `v-if`/`v-else-if`/`v-else` without `key` <sup data-p="d">use with caution</sup>
+### `v-if`/`v-else-if`/`v-else` without `key` <sup data-p="d">використовувати з обережністю</sup>
 
 **It's usually best to use `key` with `v-if` + `v-else`, if they are the same element type (e.g. both `<div>` elements).**
 
@@ -1791,7 +1791,7 @@ By default, Vue updates the DOM as efficiently as possible. That means when swit
 
 
 
-### Element selectors with `scoped` <sup data-p="d">use with caution</sup>
+### Element selectors with `scoped` <sup data-p="d">використовувати з обережністю</sup>
 
 **Element selectors should be avoided with `scoped`.**
 
@@ -1844,7 +1844,7 @@ button {
 
 
 
-### Implicit parent-child communication <sup data-p="d">use with caution</sup>
+### Implicit parent-child communication <sup data-p="d">використовувати з обережністю</sup>
 
 **Props and events should be preferred for parent-child component communication, instead of `this.$parent` or mutating props.**
 
@@ -1937,7 +1937,7 @@ Vue.component('TodoItem', {
 
 
 
-### Non-flux state management <sup data-p="d">use with caution</sup>
+### Non-flux state management <sup data-p="d">використовувати з обережністю</sup>
 
 **[Vuex](https://github.com/vuejs/vuex) should be preferred for global state management, instead of `this.$root` or a global event bus.**
 

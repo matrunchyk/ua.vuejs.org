@@ -31,7 +31,7 @@ var example1 = new Vue({
 })
 ```
 
-Result:
+Результат:
 
 {% raw %}
 <ul id="example-1" class="demo">
@@ -75,7 +75,7 @@ var example2 = new Vue({
 })
 ```
 
-Result:
+Результат:
 
 {% raw%}
 <ul id="example-2" class="demo">
@@ -87,7 +87,7 @@ Result:
 var example2 = new Vue({
   el: '#example-2',
   data: {
-    parentMessage: 'Parent',
+    parentMessage: 'Батьківська область видимості',
     items: [
       { message: 'Фуу' },
       { message: 'Бар' }
@@ -128,7 +128,7 @@ new Vue({
 })
 ```
 
-Result:
+Результат:
 
 {% raw %}
 <ul id="v-for-object" class="demo">
@@ -206,35 +206,35 @@ new Vue({
 </script>
 {% endraw %}
 
-<p class="tip">When iterating over an object, the order is based on the enumeration order of `Object.keys()`, which is **not** guaranteed to be consistent across JavaScript engine implementations.</p>
+<p class="tip">При ітерації властивостей об'єкта, порядок оснований на порядку отримання його ключів через `Object.keys()`, що **не гарантує** консистентність в різних імплементаціях JavaScript двигунів.</p>
 
-## Maintaining State
+## Підтримка стану
 
-When Vue is updating a list of elements rendered with `v-for`, by default it uses an "in-place patch" strategy. If the order of the data items has changed, instead of moving the DOM elements to match the order of the items, Vue will patch each element in-place and make sure it reflects what should be rendered at that particular index. This is similar to the behavior of `track-by="$index"` in Vue 1.x.
+Коли Vue оновлює список елементів, відмальованих за допомогою `v-for`, за замовчуванням він використовує так звану стратегію "заміна на місці" ("in-place patch"). В тому порядку, в якому елементи були змінені, замість того, щоб переміщати елементи DOM для збереження порядку елементів списку, Vue змінить їх на місці, переконавшись, що вони відповідають тому, що має буди відмальовано за конкретним індексом елементу. Це схоже до поведінки `track-by="$index"` у Vue 1.x.
 
-This default mode is efficient, but **only suitable when your list render output does not rely on child component state or temporary DOM state (e.g. form input values)**.
+Режим за замовчуванням є ефективним, але він **підходить лише коли відмальований список не покладається на стан дочірніх компонентів чи на тимчасовий стан DOM (наприклад, ввід з полів форми)**.
 
-To give Vue a hint so that it can track each node's identity, and thus reuse and reorder existing elements, you need to provide a unique `key` attribute for each item:
+Для того, щоб підказати Vue стежити за ідентичністю кожного елементу, використовуючи та міняючи порядок наявних елементів, вам потрібно задати унікальний атрибут-ключ `key` для кожного з них:
 
 ``` html
 <div v-for="item in items" v-bind:key="item.id">
-  <!-- content -->
+  <!-- вміст -->
 </div>
 ```
 
-It is recommended to provide a `key` attribute with `v-for` whenever possible, unless the iterated DOM content is simple, or you are intentionally relying on the default behavior for performance gains.
+Рекомендується задавати атрибут `key` при використанні з `v-for` де тільки це можливо, за винятком, якщо дані DOM, над якими проводиться ітерація досить прості, або якщо ви навмисно спираєтесь на поведінку за замовчуванням задля кращої швидкодії.
 
-Since it's a generic mechanism for Vue to identify nodes, the `key` also has other uses that are not specifically tied to `v-for`, as we will see later in the guide.
+Хоч це є загальним механізмом для Vue при ідентифікації елементів, атрибут `key` також має інші використання, які не суто стосуються до `v-for`, як ми це побачимо пізніше у цьому посібнику.
 
-<p class="tip">Don't use non-primitive values like objects and arrays as `v-for` keys. Use string or numeric values instead.</p>
+<p class="tip">Не використовуйте не-примітивні значення, такі як об'єкти чи масиви в якості атрибуту `key` з `v-for`. Краще використовуйте рядкові або числові значення.</p>
 
-For detailed usage of the `key` attribute, please see the [`key` API documentation](https://vuejs.org/v2/api/#key).
+Для детального розгляду атрибуту `key`, будь ласка, перегляньте [документацію по API для `key`](https://vuejs.org.ua/v2/api/#key).
 
-## Array Change Detection
+## Відстеження зміни масиву
 
-### Mutation Methods
+### Методи мутацій
 
-Vue wraps an observed array's mutation methods so they will also trigger view updates. The wrapped methods are:
+Vue обгортає методи відстежуваного масиву таким чином, що його мутація спричинить й оновлення асоційованого вигляду. Перелік обгорнутих методів наступний:
 
 - `push()`
 - `pop()`
@@ -244,29 +244,29 @@ Vue wraps an observed array's mutation methods so they will also trigger view up
 - `sort()`
 - `reverse()`
 
-You can open the console and play with the previous examples' `items` array by calling their mutation methods. For example: `example1.items.push({ message: 'Baz' })`.
+Ви можете відкрити консоль та погратися з масивом `items` з попередніх прикладів, викликаючи їхні методи. Наприклад, `example1.items.push({ message: 'Баз' })`.
 
-### Replacing an Array
+### Заміна масиву
 
-Mutation methods, as the name suggests, mutate the original array they are called on. In comparison, there are also non-mutating methods, e.g. `filter()`, `concat()` and `slice()`, which do not mutate the original array but **always return a new array**. When working with non-mutating methods, you can replace the old array with the new one:
+Методи мутацій, як і підказує ім'я, змінюють оригінальний масив, на якому було викликано той чи інший метод. Для порівняння, є й інші не мутуючі масив методи, як, наприклад, `filter()`, `concat()` та `slice()`, які не змінюють оригінальний масив, але **завжди повертають новий**. Працюючи з не мутуючими масив методами, ви можете замінити старий масив новим:
 
 ``` js
 example1.items = example1.items.filter(function (item) {
-  return item.message.match(/Foo/)
+  return item.message.match(/Фуу/)
 })
 ```
 
-You might think this will cause Vue to throw away the existing DOM and re-render the entire list - luckily, that is not the case. Vue implements some smart heuristics to maximize DOM element reuse, so replacing an array with another array containing overlapping objects is a very efficient operation.
+Ви можете подумати, що Vue викине наявний DOM та перемалює повний список — однак, на щастя, це не так. Vue застосовує деяку розумну евристику для максимізації перевикористання DOM елементів, тому заміна старого масиву новим, в яких є деякі ті ж самі елементи, буде досить ефективною операцією.
 
-### Caveats
+### Застереження
 
-Due to limitations in JavaScript, there are types of changes that Vue **cannot detect** with arrays and objects. These are discussed in the [reactivity](reactivity.html#Change-Detection-Caveats) section.
+У зв'язку з обмеженнями в JavaScript, є певні типи змін, які Vue **не може відстежити** з масивами та об'єктами. Це було обговорено в розділі [реактивності](reactivity.html#Застереження щодо відстежування змін).
 
-## Displaying Filtered/Sorted Results
+## Показ відфільтрованих/відсортованих результатів
 
-Sometimes we want to display a filtered or sorted version of an array without actually mutating or resetting the original data. In this case, you can create a computed property that returns the filtered or sorted array.
+Інколи ми хочемо показати відфільтровану або посортовану версію масиву без власне мутації або скидання оригінальних даних. В таких випадках, ви можете створити обчислювану властивість, яка повертає відфільтрований або відсортований масив.
 
-For example:
+Приклад:
 
 ``` html
 <li v-for="n in evenNumbers">{{ n }}</li>
@@ -285,7 +285,7 @@ computed: {
 }
 ```
 
-In situations where computed properties are not feasible (e.g. inside nested `v-for` loops), you can use a method:
+В ситуаціях, де обчислювані властивості не підходять (наприклад, всередині вкладених циклів `v-for`), ви можете скористатися наступним методом:
 
 ```html
 <ul v-for="set in sets">
@@ -306,9 +306,9 @@ methods: {
 }
 ```
 
-## `v-for` with a Range
+## Діапазони у `v-for`
 
-`v-for` can also take an integer. In this case it will repeat the template that many times.
+`v-for` може також приймати число. В цьому випадку шаблон буде повторюватися відповідну тому числу кількість разів.
 
 ``` html
 <div>
@@ -316,7 +316,7 @@ methods: {
 </div>
 ```
 
-Result:
+Результат:
 
 {% raw %}
 <div id="range" class="demo">
@@ -327,9 +327,9 @@ Result:
 </script>
 {% endraw %}
 
-## `v-for` on a `<template>`
+## `v-for` з `<template>`
 
-Similar to template `v-if`, you can also use a `<template>` tag with `v-for` to render a block of multiple elements. For example:
+Подібно до `v-if`, ви також можете використовувати тег `<template>` з `v-for` для відмальовування одразу кількох елементів. Для прикладу:
 
 ``` html
 <ul>
@@ -342,6 +342,7 @@ Similar to template `v-if`, you can also use a `<template>` tag with `v-for` to 
 
 ## `v-for` with `v-if`
 
+<p class="tip">Варто зазначити, що **не** рекомендується використовувати `v-if` разом з `v-for`. Зверніться до [style guide](/v2/style-guide/#Avoid-v-if-with-v-for-essential) for details.</p>
 <p class="tip">Note that it's **not** recommended to use `v-if` and `v-for` together. Refer to [style guide](/v2/style-guide/#Avoid-v-if-with-v-for-essential) for details.</p>
 
 When they exist on the same node, `v-for` has a higher priority than `v-if`. That means the `v-if` will be run on each iteration of the loop separately. This can be useful when you want to render nodes for only _some_ items, like below:

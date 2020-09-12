@@ -18,7 +18,7 @@ Every component instance has a corresponding **watcher** instance, which records
 
 ![Reactivity Cycle](/images/data.png)
 
-## Change Detection Caveats
+## Застереження щодо відстежування змін
 
 Due to limitations in JavaScript, there are types of changes that Vue **cannot detect**. However, there are ways to circumvent them to preserve reactivity.
 
