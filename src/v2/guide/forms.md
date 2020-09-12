@@ -4,30 +4,30 @@ type: guide
 order: 10
 ---
 
-## Basic Usage
+## Основне використання
 
-You can use the `v-model` directive to create two-way data bindings on form input, textarea, and select elements. It automatically picks the correct way to update the element based on the input type. Although a bit magical, `v-model` is essentially syntax sugar for updating data on user input events, plus special care for some edge cases.
+Ви можете використовувати директиву `v-model` для створення двонаправленого зв'язування на полях вводу форми `input`, `textarea`, та елементів `select`. Вона автоматично визначає правильних шлях для оновлення елементу відповідно до його типу. Водночас, можливо дещо магічно, `v-model` є просто "приправою", яка оновлює дані при подіях на полях користувацького вводу і здійснює певну додаткова обробку крайніх випадків.
 
-<p class="tip">`v-model` will ignore the initial `value`, `checked`, or `selected` attributes found on any form elements. It will always treat the Vue instance data as the source of truth. You should declare the initial value on the JavaScript side, inside the `data` option of your component.</p>
+<p class="tip">`v-model` ігноруватиме початкові значення атрибутів `value`, `checked`, або `selected`, виявлених на будь-яких елементів форми. Вона завжди розглядатиме дані екземпляру Vue як "єдине джерело правди". Ви повинні оголошувати початкове значення на стороні JavaScript, всередині властивості `data` вашої компоненти.</p>
 
-`v-model` internally uses different properties and emits different events for different input elements:
-- text and textarea elements use `value` property and `input` event;
-- checkboxes and radiobuttons use `checked` property and `change` event;
-- select fields use `value` as a prop and `change` as an event.
+`v-model` всередині використовує різні властивості та видає різні події для різних полів вводу форми:
+- текстові елементи `<input>` та `<textarea>` використовують властивість `value` та подію `input`;
+- прапорцеві елементи та радіокнопки `<input>` використовують властивість `checked` та подію `change`;
+- елементи вибору `<select>` використовують властивість `value` та подію `change`.
 
-<p class="tip" id="vmodel-ime-tip">For languages that require an [IME](https://en.wikipedia.org/wiki/Input_method) (Chinese, Japanese, Korean, etc.), you'll notice that `v-model` doesn't get updated during IME composition. If you want to cater to these updates as well, use the `input` event instead.</p>
+<p class="tip" id="vmodel-ime-tip">Для мов, які використовують [IME](https://en.wikipedia.org/wiki/Input_method) (Chinese, Japanese, Korean, etc.), ви побачите, що `v-model` не оновлюється при наборі IME. Якщо ви хочете задовольнити ці умови також, краще використовуйте подію `input`.</p>
 
-### Text
+### Текст
 
 ``` html
-<input v-model="message" placeholder="edit me">
-<p>Message is: {{ message }}</p>
+<input v-model="message" placeholder="відредагуй мене">
+<p>Повідомлення: {{ message }}</p>
 ```
 
 {% raw %}
 <div id="example-1" class="demo">
-  <input v-model="message" placeholder="edit me">
-  <p>Message is: {{ message }}</p>
+  <input v-model="message" placeholder="відредагуй мене">
+  <p>Повідомлення: {{ message }}</p>
 </div>
 <script>
 new Vue({
@@ -39,21 +39,21 @@ new Vue({
 </script>
 {% endraw %}
 
-### Multiline text
+### Багаторядковий текст
 
 ``` html
-<span>Multiline message is:</span>
+<span>Багаторядкове повідомлення:</span>
 <p style="white-space: pre-line;">{{ message }}</p>
 <br>
-<textarea v-model="message" placeholder="add multiple lines"></textarea>
+<textarea v-model="message" placeholder="додайте кілька рядків"></textarea>
 ```
 
 {% raw %}
 <div id="example-textarea" class="demo">
-  <span>Multiline message is:</span>
+  <span>Багаторядкове повідомлення:</span>
   <p style="white-space: pre-line;">{{ message }}</p>
   <br>
-  <textarea v-model="message" placeholder="add multiple lines"></textarea>
+  <textarea v-model="message" placeholder="додайте кілька рядків"></textarea>
 </div>
 <script>
 new Vue({
@@ -66,12 +66,12 @@ new Vue({
 {% endraw %}
 
 {% raw %}
-<p class="tip">Interpolation on textareas (<code>&lt;textarea&gt;{{text}}&lt;/textarea&gt;</code>) won't work. Use <code>v-model</code> instead.</p>
+<p class="tip">Інтерпоряція на елементах `<textarea>` (<code>&lt;textarea&gt;{{text}}&lt;/textarea&gt;</code>) не працюватиме. Використовуйте краще <code>v-model</code>.</p>
 {% endraw %}
 
-### Checkbox
+### Прапорці
 
-Single checkbox, boolean value:
+Одинарний прапорець, булеве значення:
 
 ``` html
 <input type="checkbox" id="checkbox" v-model="checked">
@@ -92,17 +92,17 @@ new Vue({
 </script>
 {% endraw %}
 
-Multiple checkboxes, bound to the same Array:
+Кілька прапорців, при зв'язуванні з масивом:
 
 ``` html
-<input type="checkbox" id="jack" value="Jack" v-model="checkedNames">
-<label for="jack">Jack</label>
-<input type="checkbox" id="john" value="John" v-model="checkedNames">
-<label for="john">John</label>
-<input type="checkbox" id="mike" value="Mike" v-model="checkedNames">
-<label for="mike">Mike</label>
+<input type="checkbox" id="ivan" value="Іван" v-model="checkedNames">
+<label for="ivan">Іван</label>
+<input type="checkbox" id="serhii" value="Сергій" v-model="checkedNames">
+<label for="serhii">Сергій</label>
+<input type="checkbox" id="andrii" value="Андрій" v-model="checkedNames">
+<label for="andrii">Андрій</label>
 <br>
-<span>Checked names: {{ checkedNames }}</span>
+<span>Вибрані імена: {{ checkedNames }}</span>
 ```
 
 ``` js
@@ -116,14 +116,14 @@ new Vue({
 
 {% raw %}
 <div id="example-3" class="demo">
-  <input type="checkbox" id="jack" value="Jack" v-model="checkedNames">
-  <label for="jack">Jack</label>
-  <input type="checkbox" id="john" value="John" v-model="checkedNames">
-  <label for="john">John</label>
-  <input type="checkbox" id="mike" value="Mike" v-model="checkedNames">
-  <label for="mike">Mike</label>
+  <input type="checkbox" id="ivan" value="Іван" v-model="checkedNames">
+  <label for="ivan">Іван</label>
+  <input type="checkbox" id="serhii" value="Сергій" v-model="checkedNames">
+  <label for="serhii">Сергій</label>
+  <input type="checkbox" id="andrii" value="Андрій" v-model="checkedNames">
+  <label for="andrii">Андрій</label>
   <br>
-  <span>Checked names: {{ checkedNames }}</span>
+  <span>Вибрані імена: {{ checkedNames }}</span>
 </div>
 <script>
 new Vue({
@@ -135,26 +135,26 @@ new Vue({
 </script>
 {% endraw %}
 
-### Radio
+### Радіо кнопки
 
 ``` html
-<input type="radio" id="one" value="One" v-model="picked">
-<label for="one">One</label>
+<input type="radio" id="one" value="Один" v-model="picked">
+<label for="one">Один</label>
 <br>
-<input type="radio" id="two" value="Two" v-model="picked">
-<label for="two">Two</label>
+<input type="radio" id="two" value="Два" v-model="picked">
+<label for="two">Два</label>
 <br>
-<span>Picked: {{ picked }}</span>
+<span>Вибрано: {{ picked }}</span>
 ```
 {% raw %}
 <div id="example-4" class="demo">
-  <input type="radio" id="one" value="One" v-model="picked">
-  <label for="one">One</label>
+  <input type="radio" id="one" value="Один" v-model="picked">
+  <label for="one">Один</label>
   <br>
-  <input type="radio" id="two" value="Two" v-model="picked">
-  <label for="two">Two</label>
+  <input type="radio" id="two" value="Два" v-model="picked">
+  <label for="two">Два</label>
   <br>
-  <span>Picked: {{ picked }}</span>
+  <span>Вибрано: {{ picked }}</span>
 </div>
 <script>
 new Vue({
@@ -166,18 +166,18 @@ new Vue({
 </script>
 {% endraw %}
 
-### Select
+### Список вибору
 
-Single select:
+Одинарний список:
 
 ``` html
 <select v-model="selected">
-  <option disabled value="">Please select one</option>
-  <option>A</option>
-  <option>B</option>
-  <option>C</option>
+  <option disabled value="">Виберіть щось одне</option>
+  <option>А</option>
+  <option>Б</option>
+  <option>В</option>
 </select>
-<span>Selected: {{ selected }}</span>
+<span>Вибрано: {{ selected }}</span>
 ```
 ``` js
 new Vue({
@@ -190,12 +190,12 @@ new Vue({
 {% raw %}
 <div id="example-5" class="demo">
   <select v-model="selected">
-    <option disabled value="">Please select one</option>
-    <option>A</option>
-    <option>B</option>
-    <option>C</option>
+    <option disabled value="">Виберіть щось одне</option>
+    <option>А</option>
+    <option>Б</option>
+    <option>В</option>
   </select>
-  <span>Selected: {{ selected }}</span>
+  <span>Вибрано: {{ selected }}</span>
 </div>
 <script>
 new Vue({
@@ -207,28 +207,28 @@ new Vue({
 </script>
 {% endraw %}
 
-<p class="tip">If the initial value of your `v-model` expression does not match any of the options, the `<select>` element will render in an "unselected" state. On iOS, this will prevent the user from being able to select the first item, because iOS does not fire a `change` event in this case. It is therefore recommended to provide a `disabled` option with an empty value, as demonstrated in the example above.</p>
+<p class="tip">Якщо початкове значення вашого виразу `v-model` яке не відповідає жодному елементу списку, тоді елемент `<select>` відмалює невибраний стан. В iOS, це унеможливить користувача вибрати перший елемент, оскільки iOS не викличе подію `change` у такому випадку. Тому радимо використовувати властивість `disabled` для порожнього елементу, як було продемонстровано у прикладі вище.</p>
 
-Multiple select (bound to Array):
+Декілька списків вибору (прив'язаних до масиву):
 
 ``` html
 <select v-model="selected" multiple>
-  <option>A</option>
-  <option>B</option>
-  <option>C</option>
+  <option>А</option>
+  <option>Б</option>
+  <option>В</option>
 </select>
 <br>
-<span>Selected: {{ selected }}</span>
+<span>Вибрано: {{ selected }}</span>
 ```
 {% raw %}
 <div id="example-6" class="demo">
-  <select v-model="selected" multiple style="width: 50px;">
-    <option>A</option>
-    <option>B</option>
-    <option>C</option>
+  <select v-model="selected" multiple>
+    <option>А</option>
+    <option>Б</option>
+    <option>В</option>
   </select>
   <br>
-  <span>Selected: {{ selected }}</span>
+  <span>Вибрано: {{ selected }}</span>
 </div>
 <script>
 new Vue({
@@ -240,7 +240,7 @@ new Vue({
 </script>
 {% endraw %}
 
-Dynamic options rendered with `v-for`:
+Динамічні списки, відмальованих через `v-for`:
 
 ``` html
 <select v-model="selected">
@@ -248,17 +248,17 @@ Dynamic options rendered with `v-for`:
     {{ option.text }}
   </option>
 </select>
-<span>Selected: {{ selected }}</span>
+<span>Вибрано: {{ selected }}</span>
 ```
 ``` js
 new Vue({
   el: '...',
   data: {
-    selected: 'A',
+    selected: 'А',
     options: [
-      { text: 'One', value: 'A' },
-      { text: 'Two', value: 'B' },
-      { text: 'Three', value: 'C' }
+      { text: 'Один', value: 'А' },
+      { text: 'Два', value: 'Б' },
+      { text: 'Три', value: 'В' }
     ]
   }
 })
@@ -270,121 +270,121 @@ new Vue({
       {{ option.text }}
     </option>
   </select>
-  <span>Selected: {{ selected }}</span>
+  <span>Вибрано: {{ selected }}</span>
 </div>
 <script>
 new Vue({
   el: '#example-7',
   data: {
-    selected: 'A',
+    selected: 'А',
     options: [
-      { text: 'One', value: 'A' },
-      { text: 'Two', value: 'B' },
-      { text: 'Three', value: 'C' }
+      { text: 'Один', value: 'А' },
+      { text: 'Два', value: 'Б' },
+      { text: 'Три', value: 'В' }
     ]
   }
 })
 </script>
 {% endraw %}
 
-## Value Bindings
+## Зв'язування значень
 
-For radio, checkbox and select options, the `v-model` binding values are usually static strings (or booleans for checkboxes):
+Для радіо кнопок, прапорців та списків вибору, зв'язані значення `v-model` є, як правило, статичними рядковими значеннями (або булевими для прапорців):
 
 ``` html
-<!-- `picked` is a string "a" when checked -->
-<input type="radio" v-model="picked" value="a">
+<!-- `picked` є рядковим значенням "а", коли вибрано -->
+<input type="radio" v-model="picked" value="а">
 
-<!-- `toggle` is either true or false -->
+<!-- `toggle` є або true або false -->
 <input type="checkbox" v-model="toggle">
 
-<!-- `selected` is a string "abc" when the first option is selected -->
+<!-- `selected` є рядком "абв", коли вибрано перший елемент списку -->
 <select v-model="selected">
-  <option value="abc">ABC</option>
+  <option value="абв">АБВ</option>
 </select>
 ```
 
-But sometimes, we may want to bind the value to a dynamic property on the Vue instance. We can use `v-bind` to achieve that. In addition, using `v-bind` allows us to bind the input value to non-string values.
+Однак, інколи, нам можливо треба буде зв'язувати значення з динамічною властивістю на екземплярі Vue. Ми також можемо використовувати `v-bind` для досягнення цього. Додатково, використання `v-bind` дозволяє зв'язати значення вводу до не-рядкових значень.
 
-### Checkbox
+### Прапорець
 
 ``` html
 <input
   type="checkbox"
   v-model="toggle"
-  true-value="yes"
-  false-value="no"
+  true-value="так"
+  false-value="ні"
 >
 ```
 
 ``` js
-// when checked:
-vm.toggle === 'yes'
-// when unchecked:
-vm.toggle === 'no'
+// коли вибрано:
+vm.toggle === 'так'
+// коли не вибрано:
+vm.toggle === 'ні'
 ```
 
-<p class="tip">The `true-value` and `false-value` attributes don't affect the input's `value` attribute, because browsers don't include unchecked boxes in form submissions. To guarantee that one of two values is submitted in a form (i.e. "yes" or "no"), use radio inputs instead.</p>
+<p class="tip">Атрибути `true-value` та `false-value` не впливають на атрибут поля вводу `value`, оскільки не відмічені прапорці не приймають участь в надісланих формах в браузерах. Для гарантування, що одне з двох значень буде надіслано, як частина форми (як-от "так" чи "ні"), краще використовуйте радіо кнопки.</p>
 
-### Radio
+### Радіо кнопки
 
 ``` html
-<input type="radio" v-model="pick" v-bind:value="a">
+<input type="radio" v-model="pick" v-bind:value="а">
 ```
 
 ``` js
-// when checked:
-vm.pick === vm.a
+// коли вибрано:
+vm.pick === vm.а
 ```
 
 ### Select Options
 
 ``` html
 <select v-model="selected">
-  <!-- inline object literal -->
+  <!-- лінійний літерал об'єкту -->
   <option v-bind:value="{ number: 123 }">123</option>
 </select>
 ```
 
 ``` js
-// when selected:
+// коли вибрано:
 typeof vm.selected // => 'object'
 vm.selected.number // => 123
 ```
 
-## Modifiers
+## Модифікатори
 
 ### `.lazy`
 
-By default, `v-model` syncs the input with the data after each `input` event (with the exception of IME composition, as [stated above](#vmodel-ime-tip)). You can add the `lazy` modifier to instead sync _after_ `change` events:
+За замовчуванням, `v-model` синхронізує введені дані з даними Vue екземпляру після кожної події `input` (за винятком набору IME, як [згадано раніше](#vmodel-ime-tip)). Ви можете додати модифікатор `lazy` замість `sync` для оновлення даних _після_ подій `change`:
 
 ``` html
-<!-- synced after "change" instead of "input" -->
+<!-- синхронізовано після "change" замість "input" -->
 <input v-model.lazy="msg">
 ```
 
 ### `.number`
 
-If you want user input to be automatically typecast as a Number, you can add the `number` modifier to your `v-model` managed inputs:
+Якщо ви хочете, щоб користувацький ввід був автоматично переведений в числовий тип, ви можете вказати модифікатор `number` до ваших полів вводу, де є підтримка `v-model`:
 
 ``` html
 <input v-model.number="age" type="number">
 ```
 
-This is often useful, because even with `type="number"`, the value of HTML input elements always returns a string. If the value cannot be parsed with `parseFloat()`, then the original value is returned.
+Це часто корисно, оскільки навіть з `type="number"`, значення з HTML поля вводу завжди повертає рядкову величину. Якщо значення не може бути розпізнано з `parseFloat()`, тоді повернеться оригінальне значення.
 
 ### `.trim`
 
-If you want whitespace from user input to be trimmed automatically, you can add the `trim` modifier to your `v-model`-managed inputs:
+Якщо ви хочете, щоб пробіли були автоматично видалені з користувацького вводу, ви можете додати модифікатор `trim` до ваших полів вводу, де є підтримка `v-model`:
 
 ```html
 <input v-model.trim="msg">
 ```
 
-## `v-model` with Components
+## `v-model` з компонентами
 
-> If you're not yet familiar with Vue's components, you can skip this for now.
+> Якщо ви ще поки не знайомі з компонентами Vue, ви можете зараз пропустити цей розділ.
 
-HTML's built-in input types won't always meet your needs. Fortunately, Vue components allow you to build reusable inputs with completely customized behavior. These inputs even work with `v-model`!
+Типи вбудованих в HTML елементів вводу не завжди можуть задовольняти вашим умовам. На щастя, компоненти Vue дозволяють вам будувати власні повторно використовувані елементи вводу з повністю налаштовуваною поведінкою. Такі елементи навіть можуть працювати з `v-model`!
 
-To learn more, read about [custom inputs](components.html#Using-v-model-on-Components) in the Components guide.
+Щоб дізнатися більше, прочитайте про [користувацькі поля вводу](components.html#Використання-v-model-на-компонентах) у розділі компонентів.
