@@ -4,18 +4,18 @@ type: guide
 order: 9
 ---
 
-<div class="vueschool"><a href="https://vueschool.io/lessons/vuejs-user-events?friend=vuejs" target="_blank" rel="sponsored noopener" title="Learn how to handle events on Vue School">Learn how to handle events in a free Vue School lesson</a></div>
+<div class="vueschool"><a href="https://vueschool.io/lessons/vuejs-user-events?friend=vuejs" target="_blank" rel="sponsored noopener" title="Дізнайся, як обробляти події на безкоштовному уроці Vue School">Дізнайтеся, як обробляти події на безкоштовному уроці Vue School</a></div>
 
-## Listening to Events
+## Прослуховування подій
 
-We can use the `v-on` directive to listen to DOM events and run some JavaScript when they're triggered.
+Ми можемо використовувати директиву `v-on` для прослуховування подій DOM і запуску методів JavaScript, коли ці події відбуваються.
 
-For example:
+Наприклад:
 
 ``` html
 <div id="example-1">
-  <button v-on:click="counter += 1">Add 1</button>
-  <p>The button above has been clicked {{ counter }} times.</p>
+  <button v-on:click="counter += 1">Додати 1</button>
+  <p>На кнопку, що вище, клацнули {{ counter }} разів.</p>
 </div>
 ```
 ``` js
@@ -27,12 +27,12 @@ var example1 = new Vue({
 })
 ```
 
-Result:
+Результат:
 
 {% raw %}
 <div id="example-1" class="demo">
-  <button v-on:click="counter += 1">Add 1</button>
-  <p>The button above has been clicked {{ counter }} times.</p>
+  <button v-on:click="counter += 1">Додати 1</button>
+  <p>На кнопку, що вище, клацнули {{ counter }} разів.</p>
 </div>
 <script>
 var example1 = new Vue({
@@ -44,16 +44,16 @@ var example1 = new Vue({
 </script>
 {% endraw %}
 
-## Method Event Handlers
+## Методи обробників подій
 
-The logic for many event handlers will be more complex though, so keeping your JavaScript in the value of the `v-on` attribute isn't feasible. That's why `v-on` can also accept the name of a method you'd like to call.
+Однак, логіка для багатьох обробників подій, буде більш складною, тому зберігати JavaScript-код в якості значення атрибута v-on не підходить. Ось чому v-on також може приймати назву методу, який ви хочете викликати.
 
-For example:
+Наприклад:
 
 ``` html
 <div id="example-2">
-  <!-- `greet` is the name of a method defined below -->
-  <button v-on:click="greet">Greet</button>
+  <!-- `greet` є ім'ям методу, визначеного нижче -->
+  <button v-on:click="greet">Привітати</button>
 </div>
 ```
 
@@ -63,12 +63,12 @@ var example2 = new Vue({
   data: {
     name: 'Vue.js'
   },
-  // define methods under the `methods` object
+  // визначити метод в об'єкті "methods"
   methods: {
     greet: function (event) {
-      // `this` inside methods points to the Vue instance
-      alert('Hello ' + this.name + '!')
-      // `event` is the native DOM event
+      // `this` всередині методів вказує на екземпляр Vue
+      alert('Привіт ' + this.name + '!')
+      // `event` - рідна подія DOM
       if (event) {
         alert(event.target.tagName)
       }
@@ -76,15 +76,15 @@ var example2 = new Vue({
   }
 })
 
-// you can invoke methods in JavaScript too
+// Ви також можете викликати методи в JavaScript
 example2.greet() // => 'Hello Vue.js!'
 ```
 
-Result:
+Результат:
 
 {% raw %}
 <div id="example-2" class="demo">
-  <button v-on:click="greet">Greet</button>
+  <button v-on:click="greet">Привітати</button>
 </div>
 <script>
 var example2 = new Vue({
@@ -94,7 +94,7 @@ var example2 = new Vue({
   },
   methods: {
     greet: function (event) {
-      alert('Hello ' + this.name + '!')
+      alert('Привіт ' + this.name + '!')
       if (event) {
         alert(event.target.tagName)
       }
@@ -104,14 +104,14 @@ var example2 = new Vue({
 </script>
 {% endraw %}
 
-## Methods in Inline Handlers
+## Методи в вбудованих обробниках
 
-Instead of binding directly to a method name, we can also use methods in an inline JavaScript statement:
+Замість прив'язки до імені методу, ми також можемо використовувати методи у вбудованому операторі JavaScript:
 
 ``` html
 <div id="example-3">
-  <button v-on:click="say('hi')">Say hi</button>
-  <button v-on:click="say('what')">Say what</button>
+  <button v-on:click="say('Привіт')">Скажи привіт</button>
+  <button v-on:click="say('Що')">Скажи що</button>
 </div>
 ```
 ``` js
@@ -125,11 +125,11 @@ new Vue({
 })
 ```
 
-Result:
+Результат:
 {% raw %}
 <div id="example-3" class="demo">
-  <button v-on:click="say('hi')">Say hi</button>
-  <button v-on:click="say('what')">Say what</button>
+  <button v-on:click="say('Привіт')">Сказати привіт</button>
+  <button v-on:click="say('Що')">Сказати що?</button>
 </div>
 <script>
 new Vue({
@@ -143,11 +143,11 @@ new Vue({
 </script>
 {% endraw %}
 
-Sometimes we also need to access the original DOM event in an inline statement handler. You can pass it into a method using the special `$event` variable:
+Іноді нам також потрібно отримати доступ до вихідної події DOM у вбудованому обробнику. Ви можете передати його в метод за допомогою спеціальної змінної `$event`:
 
 ``` html
-<button v-on:click="warn('Form cannot be submitted yet.', $event)">
-  Submit
+<button v-on:click="warn('Форму все ще не можна надіслати', $event)">
+  Надіслати
 </button>
 ```
 
@@ -155,7 +155,7 @@ Sometimes we also need to access the original DOM event in an inline statement h
 // ...
 methods: {
   warn: function (message, event) {
-    // now we have access to the native event
+    // тепер ми маємо доступ до події
     if (event) {
       event.preventDefault()
     }
@@ -164,11 +164,11 @@ methods: {
 }
 ```
 
-## Event Modifiers
+## Модифікатори подій
 
-It is a very common need to call `event.preventDefault()` or `event.stopPropagation()` inside event handlers. Although we can do this easily inside methods, it would be better if the methods can be purely about data logic rather than having to deal with DOM event details.
+Часто є необхідність викликати `event.preventDefault()` або `event.stopPropagation()` всередині обробників подій. Незважаючи на те, що ми можемо зробити це легко всередині методів, було б краще, якщо б методи використовували виключно логіку даних, а не мали справу з деталями подій DOM.
 
-To address this problem, Vue provides **event modifiers** for `v-on`. Recall that modifiers are directive postfixes denoted by a dot.
+Для вирішення цієї проблеми Vue надає **модифікатори подій** для `v-on`. Нагадаємо, що модифікатори - це директивні постфікси, розділені крапкою.
 
 - `.stop`
 - `.prevent`
@@ -178,63 +178,63 @@ To address this problem, Vue provides **event modifiers** for `v-on`. Recall tha
 - `.passive`
 
 ``` html
-<!-- the click event's propagation will be stopped -->
+<!-- розповсюдження події кліку буде зупинено -->
 <a v-on:click.stop="doThis"></a>
 
-<!-- the submit event will no longer reload the page -->
+<!-- подія надсилання більше не буде перезавантажувати сторінку -->
 <form v-on:submit.prevent="onSubmit"></form>
 
-<!-- modifiers can be chained -->
+<!-- модифікатори можуть бути об'єднані в ланцюжок -->
 <a v-on:click.stop.prevent="doThat"></a>
 
-<!-- just the modifier -->
+<!-- тільки модифікатор -->
 <form v-on:submit.prevent></form>
 
-<!-- use capture mode when adding the event listener -->
-<!-- i.e. an event targeting an inner element is handled here before being handled by that element -->
+<!-- використовувати режим перехоплення під час додавання прослуховувача подій -->
+<!-- тобто подія, націлена на внутрішній елемент, обробляється тут перед обробкою цим елементом -->
 <div v-on:click.capture="doThis">...</div>
 
-<!-- only trigger handler if event.target is the element itself -->
-<!-- i.e. not from a child element -->
+<!-- обробник прослуховувача, лише якщо event.target є самим елементом -->
+<!-- тобто не з дочірнього елемента -->
 <div v-on:click.self="doThat">...</div>
 ```
 
-<p class="tip">Order matters when using modifiers because the relevant code is generated in the same order. Therefore using `v-on:click.prevent.self` will prevent **all clicks** while `v-on:click.self.prevent` will only prevent clicks on the element itself.</p>
+<p class="tip">Порядок має значення при використанні модифікаторів, оскільки відповідний код генерується в тому ж порядку. Тому використання `v-on:click.prevent.self` запобіжить **всім клікам**, тоді як` v-on:click.self.prevent` запобіжить лише клікам самого елемента.</p>
 
-> New in 2.1.4+
+> Нове у 2.1.4+
 
 ``` html
-<!-- the click event will be triggered at most once -->
+<!-- подія кліку буде ініційована лише один раз -->
 <a v-on:click.once="doThis"></a>
 ```
 
-Unlike the other modifiers, which are exclusive to native DOM events, the `.once` modifier can also be used on [component events](components-custom-events.html). If you haven't read about components yet, don't worry about this for now.
+На відміну від інших модифікаторів, які є лише для власних подій DOM, модифікатор `.once` також може використовуватися для [спеціальних подій] (components-custom-events.html). Якщо ви ще не читали про компоненти, наразі не хвилюйтеся про це.
 
-> New in 2.3.0+
+> Нове у 2.3.0+
 
-Vue also offers the `.passive` modifier, corresponding to [`addEventListener`'s `passive` option](https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/addEventListener#Parameters).
+Vue також пропонує `.passive` модифікатор, відповідно до [`passive` опція до `addEventListener`](https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/addEventListener#Parameters).
 
 ``` html
-<!-- the scroll event's default behavior (scrolling) will happen -->
-<!-- immediately, instead of waiting for `onScroll` to complete  -->
-<!-- in case it contains `event.preventDefault()`                -->
+<!-- відбудеться поведінка за замовчуванням для прокрутки (прокрутка) -->
+<!-- негайно, замість того, щоб чекати завершення `onScroll` -->
+<!-- у випадку, якщо він містить `event.preventDefault()` -->
 <div v-on:scroll.passive="onScroll">...</div>
 ```
 
-The `.passive` modifier is especially useful for improving performance on mobile devices.
+Модифікатор `.passive` особливо корисний для підвищення продуктивності мобільних пристроїв.
 
-<p class="tip">Don't use `.passive` and `.prevent` together, because `.prevent` will be ignored and your browser will probably show you a warning. Remember, `.passive` communicates to the browser that you _don't_ want to prevent the event's default behavior.</p>
+<p class="tip">Не використовуйте ".passive" та ".prevent" разом, оскільки ".prevent" буде проігноровано, і ваш браузер, ймовірно, покаже вам попередження. Пам'ятайте, `.passive` повідомляє браузеру, що ви **не бажаєте** запобігти поведінці за замовчуванням.</p>
 
-## Key Modifiers
+## Модифікатори клавіш
 
-When listening for keyboard events, we often need to check for specific keys. Vue allows adding key modifiers for `v-on` when listening for key events:
+Прослуховуючи події на клавіатурі, нам часто потрібно перевірити натискання певних клавіш. Vue дозволяє додавати модифікатори клавіш для `v-on` при прослуховуванні подій клавіатури чи миші:
 
 ``` html
-<!-- only call `vm.submit()` when the `key` is `Enter` -->
+<!-- `vm.submit()` спрацює тільки натиснута клавіша `Enter` -->
 <input v-on:keyup.enter="submit">
 ```
 
-You can directly use any valid key names exposed via [`KeyboardEvent.key`](https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/key/Key_Values) as modifiers by converting them to kebab-case.
+Ви можете безпосередньо використовувати будь-які дійсні імена ключів, визначені у [`KeyboardEvent.key`](https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/key/Key_Values) як модифікатори перевівши їх у kebab-case.
 
 ``` html
 <input v-on:keyup.page-down="onPageDown">
@@ -242,21 +242,21 @@ You can directly use any valid key names exposed via [`KeyboardEvent.key`](https
 
 In the above example, the handler will only be called if `$event.key` is equal to `'PageDown'`.
 
-### Key Codes
+### Коди клавіш
 
-<p class="tip">The use of `keyCode` events [is deprecated](https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/keyCode) and may not be supported in new browsers.</p>
+<p class="tip">Використання подій `keyCode` [застаріле](https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/keyCode) і може не підтримуватися в нових браузерах.</p>
 
-Using `keyCode` attributes is also permitted:
+Також можна використовувати атрибути `keyCode`
 
 ``` html
 <input v-on:keyup.13="submit">
 ```
 
-Vue provides aliases for the most commonly used key codes when necessary for legacy browser support:
+Vue надає псевдоніми для найбільш часто використовуваних кодів клавіш, коли це необхідно для підтримки застарілих браузерів:
 
 - `.enter`
 - `.tab`
-- `.delete` (captures both "Delete" and "Backspace" keys)
+- `.delete` (перехоплює як клавіші "Delete", так і "Backspace")
 - `.esc`
 - `.space`
 - `.up`
@@ -264,58 +264,58 @@ Vue provides aliases for the most commonly used key codes when necessary for leg
 - `.left`
 - `.right`
 
-<p class="tip">A few keys (`.esc` and all arrow keys) have inconsistent `key` values in IE9, so these built-in aliases should be preferred if you need to support IE9.</p>
+<p class="tip">Кілька клавіш (`.esc` та всі клавіші зі стрілками) мають невідповідні значення `keyCode` в IE9, тому цим вбудованим псевдонімам слід віддати перевагу, якщо вам потрібна підтримка IE9.</p>
 
-You can also [define custom key modifier aliases](../api/#keyCodes) via the global `config.keyCodes` object:
+Ви також можете [визначити спеціальні псевдоніми модифікатора клавіш](../api/#keyCodes) через глобальний об'єкт `config.keyCodes`:
 
 ``` js
 // enable `v-on:keyup.f1`
-Vue.config.keyCodes.f1 = 112
+Vue.config.keyCodes.f1 = 112;
 ```
 
-## System Modifier Keys
+## Системні модифікатори клавіш
 
-> New in 2.1.0+
+> Нове у 2.1.0+
 
-You can use the following modifiers to trigger mouse or keyboard event listeners only when the corresponding modifier key is pressed:
+Ви можете використовувати наступні модифікатори для запуску прослуховувачів подій миші або клавіатури лише тоді, коли натиснута відповідна клавіша модифікатора:
 
 - `.ctrl`
 - `.alt`
 - `.shift`
 - `.meta`
 
-> Note: On Macintosh keyboards, meta is the command key (⌘). On Windows keyboards, meta is the Windows key (⊞). On Sun Microsystems keyboards, meta is marked as a solid diamond (◆). On certain keyboards, specifically MIT and Lisp machine keyboards and successors, such as the Knight keyboard, space-cadet keyboard, meta is labeled “META”. On Symbolics keyboards, meta is labeled “META” or “Meta”.
+> Note: На клавіатурах Macintosh мета є командною клавішею (⌘). На клавіатурах Windows мета - це клавіша Windows (⊞). На клавіатурах Sun Microsystems мета позначена як твердий алмаз (◆). На деяких клавіатурах, зокрема на клавіатурах машин MIT та Lisp, та їх наступниках, таких як клавіатура Knight, "space-cadet" клавіатура, мета позначена як "META". На клавіатурах Symbolics мета позначена як “META” або “Meta”.
 
-For example:
+На приклад:
 
 ```html
 <!-- Alt + C -->
 <input v-on:keyup.alt.67="clear">
 
 <!-- Ctrl + Click -->
-<div v-on:click.ctrl="doSomething">Do something</div>
+<div v-on:click.ctrl="doSomething">робити щось</div>
 ```
 
-<p class="tip">Note that modifier keys are different from regular keys and when used with `keyup` events, they have to be pressed when the event is emitted. In other words, `keyup.ctrl` will only trigger if you release a key while holding down `ctrl`. It won't trigger if you release the `ctrl` key alone. If you do want such behaviour, use the `keyCode` for `ctrl` instead: `keyup.17`.</p>
+<p class="tip">Зверніть увагу, що клавіші-модифікатори відрізняються від звичайних клавіш, і коли вони використовуються з подіями `keyup`, їх потрібно натискати, коли подія відбувається. Іншими словами, `keyup.ctrl` спрацьовує, лише якщо ви відпустите клавішу, утримуючи натиснутою` ctrl`. Це не спрацює, якщо ви відпустите клавішу `ctrl` самостійно. Якщо ви хочете такої поведінки, використовуйте замість `keyCode` для` ctrl`: `keyup.17`.</p>
 
-### `.exact` Modifier
+### Модифікатор `.exact`
 
-> New in 2.5.0+
+> Нове у 2.5.0+
 
-The `.exact` modifier allows control of the exact combination of system modifiers needed to trigger an event.
+Модифікатор `.exact` дозволяє контролювати точну комбінацію системних модифікаторів, необхідних для активації події.
 
 ``` html
-<!-- this will fire even if Alt or Shift is also pressed -->
+<!-- це спрацює, навіть якщо натиснуто клавіші Alt або Shift -->
 <button v-on:click.ctrl="onClick">A</button>
 
-<!-- this will only fire when Ctrl and no other keys are pressed -->
+<!-- це спрацює лише тоді, коли натиснута клавіша Ctrl та жодної іншої -->
 <button v-on:click.ctrl.exact="onCtrlClick">A</button>
 
-<!-- this will only fire when no system modifiers are pressed -->
+<!-- це спрацює лише тоді, коли не натиснуті системні модифікатори -->
 <button v-on:click.exact="onClick">A</button>
 ```
 
-### Mouse Button Modifiers
+### Модифікатори клавіш миші
 
 > New in 2.2.0+
 
@@ -323,14 +323,14 @@ The `.exact` modifier allows control of the exact combination of system modifier
 - `.right`
 - `.middle`
 
-These modifiers restrict the handler to events triggered by a specific mouse button.
+Ці модифікатори обмежують обробник подіями, викликаними певною кнопкою миші.
 
-## Why Listeners in HTML?
+## Чому слухачі в HTML?
 
-You might be concerned that this whole event listening approach violates the good old rules about "separation of concerns". Rest assured - since all Vue handler functions and expressions are strictly bound to the ViewModel that's handling the current view, it won't cause any maintenance difficulty. In fact, there are several benefits in using `v-on`:
+Ви можете бути стурбовані тим, що весь цей підхід до прослуховування подій порушує старі добрі правила щодо "відокремлення проблем". Будьте впевнені - оскільки всі функції та вирази обробника Vue суворо пов’язані з ViewModel, який обробляє поточний вигляд, це не спричинить труднощів з технічним обслуговуванням. Насправді, використання "v-on" має кілька переваг:
 
-1. It's easier to locate the handler function implementations within your JS code by skimming the HTML template.
+1. Простіше знайти функцію-обробник події у вашому JS коді простим переглядом HTML шаблону.
 
-2. Since you don't have to manually attach event listeners in JS, your ViewModel code can be pure logic and DOM-free. This makes it easier to test.
+2. Оскільки вам не потрібно вручну підключати прослуховувачі подій у JS, ваш код ViewModel може бути чистою логікою та без DOM. Це полегшує тестування.
 
-3. When a ViewModel is destroyed, all event listeners are automatically removed. You don't need to worry about cleaning it up yourself.
+3. Коли ViewModel знищений, усі прослуховувачі подій автоматично видаляються. Вам не потрібно турбуватися про те, щоб видаляти їх самостійно.
