@@ -159,7 +159,7 @@ post: {
 
 Як правило, існує два випадки, де хочеться змінити вхідний параметр:
 
-1. **The prop is used to pass in an initial value; the child component wants to use it as a local data property afterwards.** In this case, it's best to define a local data property that uses the prop as its initial value:
+1. **Вхідний параметр використовується для передачі початкового значення; після чого, дочірній компонент використовуватиме його як локальну властивість даних.** В даному випадку, найкраще оголошувати локальну властивість даних, яка використовуватиме вхідний параметр з його початковим значенням:
 
   ``` js
   props: ['initialCounter'],
@@ -170,7 +170,7 @@ post: {
   }
   ```
 
-2. **The prop is passed in as a raw value that needs to be transformed.** In this case, it's best to define a computed property using the prop's value:
+2. **Вхідний параметр містить початкове значення, що підлягає перетворення.** В даному випадку, найкраще оголосити обчислювану властивість, що використовує значення вхідного параметра:
 
   ``` js
   props: ['size'],
@@ -181,58 +181,58 @@ post: {
   }
   ```
 
-<p class="tip">Note that objects and arrays in JavaScript are passed by reference, so if the prop is an array or object, mutating the object or array itself inside the child component **will** affect parent state.</p>
+<p class="tip">Зверніть увагу, що об'єкти та масиви в JavaScript передаються по посиланню, тому, якщо вхідний параметр є масивом або об'єктом, мутація масиву або об'єкту всередині дочірнього компоненту **спричинить** мутацію батьківського стану даних.</p>
 
-## Prop Validation
+## Валідація вхідних параметрів
 
-Components can specify requirements for their props, such as the types you've already seen. If a requirement isn't met, Vue will warn you in the browser's JavaScript console. This is especially useful when developing a component that's intended to be used by others.
+Компоненти можуть вказувати вимоги для своїх вхідних параметрів, для типів, які ви вже бачили. Якщо вимога не задоволена, Vue попередить вас в консолі розробника JavaScript у браузері. Це особливо корисно при розробці компонентів, призначених для використання іншими.
 
-To specify prop validations, you can provide an object with validation requirements to the value of `props`, instead of an array of strings. For example:
+Для активування валідації певного вхідного параметра, ви можете вказати об'єкт з вимогами щодо валідації до вхідного параметру для властивості `props`, замість простого масиву рядкових величин. Наприклад:
 
 ``` js
 Vue.component('my-component', {
   props: {
-    // Basic type check (`null` and `undefined` values will pass any type validation)
+    // Проста перевірка типу (`null` та `undefined` пройдуть валідацію будь-якого типу)
     propA: Number,
-    // Multiple possible types
+    // Декілька можливих типів
     propB: [String, Number],
-    // Required string
+    // Рядковий тип, обов'язковий
     propC: {
       type: String,
       required: true
     },
-    // Number with a default value
+    // Число із значенням по замовчуванню
     propD: {
       type: Number,
       default: 100
     },
-    // Object with a default value
+    // Об'єкт із значенням по замовчуванню
     propE: {
       type: Object,
-      // Object or array defaults must be returned from
-      // a factory function
+      // Значення по замовчуванню для об'єктів або масивів повинні
+      // використовувати функцію-фабрику
       default: function () {
-        return { message: 'hello' }
+        return { message: 'привіт' }
       }
     },
-    // Custom validator function
+    // Власна функція валідації
     propF: {
       validator: function (value) {
-        // The value must match one of these strings
-        return ['success', 'warning', 'danger'].indexOf(value) !== -1
+        // Значення має бути одним з наступних:
+        return ['помилка', 'попередження', 'небезпека'].indexOf(value) !== -1
       }
     }
   }
 })
 ```
 
-When prop validation fails, Vue will produce a console warning (if using the development build).
+При помилці валідації вхідного параметра Vue згенерує попередження в консолі (при використанні збірки для розробників).
 
-<p class="tip">Note that props are validated **before** a component instance is created, so instance properties (e.g. `data`, `computed`, etc) will not be available inside `default` or `validator` functions.</p>
+<p class="tip">Врахуйте, що валідація вхідних параметрів виконується **перед тим**, як екземпляр компонента було створено, тому властивості екземпляру (такі як `data`, `computed`, і т. д.) не будуть доступними в функціях `default` та `validator`.</p>
 
-### Type Checks
+### Перевірка типів
 
-The `type` can be one of the following native constructors:
+Значення властивості `type` може бути одним з наступних конструкторів JavaScript:
 
 - String
 - Number
@@ -243,7 +243,7 @@ The `type` can be one of the following native constructors:
 - Function
 - Symbol
 
-In addition, `type` can also be a custom constructor function and the assertion will be made with an `instanceof` check. For example, given the following constructor function exists:
+Крім того, `type` може бути також і власною функцією-конструктором — в такому разі перевірка буде здійснюватися через оператор `instanceof`. Розглянемо приклад з наступною функцією-конструктором:
 
 ```js
 function Person (firstName, lastName) {
@@ -252,7 +252,7 @@ function Person (firstName, lastName) {
 }
 ```
 
-You could use:
+Ви можете її використовувати наступним чином:
 
 ```js
 Vue.component('blog-post', {
@@ -262,31 +262,31 @@ Vue.component('blog-post', {
 })
 ```
 
-to validate that the value of the `author` prop was created with `new Person`.
+Таким чином, ви можете перевіряти, що вхідний параметр `author` було створено за допомогою `new Person`.
 
-## Non-Prop Attributes
+## Атрибути, що не є вхідними параметрами
 
-A non-prop attribute is an attribute that is passed to a component, but does not have a corresponding prop defined.
+Атрибут, що не є вхідним параметром — це атрибут, який було передано до компонента, але його не було оголошено як вхідного параметра.
 
-While explicitly defined props are preferred for passing information to a child component, authors of component libraries can't always foresee the contexts in which their components might be used. That's why components can accept arbitrary attributes, which are added to the component's root element.
+Хоча явне оголошення вхідних параметрів вважається кращим способом для передачі інформації до компонента, автори бібліотек компонентів не завжди можуть передбачити контекст, де той чи інший компонент буде використовуватися. Тому компоненти можуть приймати будь-які атрибути, які просто будуть додані до кореневого елемента компоненти.
 
-For example, imagine we're using a 3rd-party `bootstrap-date-input` component with a Bootstrap plugin that requires a `data-date-picker` attribute on the `input`. We can add this attribute to our component instance:
+For example, уявіть, що ми використовуємо сторонній компонент `bootstrap-date-input` з плагіном Bootstrap, що вимагає атрибут `data-date-picker` для елементу `input`. Ми можемо додати цей атрибут до компонента:
 
 ``` html
 <bootstrap-date-input data-date-picker="activated"></bootstrap-date-input>
 ```
 
-And the `data-date-picker="activated"` attribute will automatically be added to the root element of `bootstrap-date-input`.
+Таким чином, атрибут `data-date-picker="activated"` буде додано до кореневого елемента `bootstrap-date-input`.
 
-### Replacing/Merging with Existing Attributes
+### Об'єднання/заміна наявних атрибутів
 
-Imagine this is the template for `bootstrap-date-input`:
+Уявіть, що це шаблон для `bootstrap-date-input`:
 
 ``` html
 <input type="date" class="form-control">
 ```
 
-To specify a theme for our date picker plugin, we might need to add a specific class, like this:
+Щоб вказати тему для нашого плагіну вибору дати, нам потрібно додати специфічний клас, наприклад:
 
 ``` html
 <bootstrap-date-input
@@ -295,16 +295,16 @@ To specify a theme for our date picker plugin, we might need to add a specific c
 ></bootstrap-date-input>
 ```
 
-In this case, two different values for `class` are defined:
+В даному випадку, для `class` задаються два значення:
 
-- `form-control`, which is set by the component in its template
-- `date-picker-theme-dark`, which is passed to the component by its parent
+- `form-control`, який задається самим компонентом в шаблоні
+- `date-picker-theme-dark`, який передається компоненту батьківським
 
-For most attributes, the value provided to the component will replace the value set by the component. So for example, passing `type="text"` will replace `type="date"` and probably break it! Fortunately, the `class` and `style` attributes are a little smarter, so both values are merged, making the final value: `form-control date-picker-theme-dark`.
+Для більшості атрибутів значення, передане до компонента замінить значення, встановлене самим компонентом. Наприклад, передане `type="text"` замінить `type="date"` і, ймовірно, зламає його! На щастя, атрибути `class` та `style` дещо розумніші, тому обидва атрибути будуть об'єднані, тому кінцеве значення буде таким: `form-control date-picker-theme-dark`.
 
-### Disabling Attribute Inheritance
+### Заборона наслідування атрибутів
 
-If you do **not** want the root element of a component to inherit attributes, you can set `inheritAttrs: false` in the component's options. For example:
+Якщо ви **не** хочете, щоб кореневий елемент компонента наслідував атрибутів, ви можете задати `inheritAttrs: false` у властивостях компонента. Для прикладу:
 
 ```js
 Vue.component('my-component', {
@@ -313,16 +313,16 @@ Vue.component('my-component', {
 })
 ```
 
-This can be especially useful in combination with the `$attrs` instance property, which contains the attribute names and values passed to a component, such as:
+Це особливо корисно при комбінації з властивістю екземпляру `$attrs`, що містить імена атрибутів та їхні значення, передані до компонента наступним чином:
 
 ```js
 {
   required: true,
-  placeholder: 'Enter your username'
+  placeholder: "Вкажіть своє ім'я"
 }
 ```
 
-With `inheritAttrs: false` and `$attrs`, you can manually decide which element you want to forward attributes to, which is often desirable for [base components](../style-guide/#Base-component-names-strongly-recommended):
+Завдяки `inheritAttrs: false` та `$attrs`, ви можете власноруч вирішувати, якому елементу ви хотіли б передавати атрибути, що часто необхідно для [іменування базових компонент](../style-guide/#Імена-базових-компонент-настійно-рекомендовано):
 
 ```js
 Vue.component('base-input', {
@@ -341,14 +341,14 @@ Vue.component('base-input', {
 })
 ```
 
-<p class="tip">Note that `inheritAttrs: false` option does **not** affect `style` and `class` bindings.</p>
+<p class="tip">Майте на увазі, що `inheritAttrs: false` **не** вплине на `style` та `class`.</p>
 
-This pattern allows you to use base components more like raw HTML elements, without having to care about which element is actually at its root:
+Ця техніка дозволяє використовувати базові компоненти більше як звичайні HTML компоненти, не турбуючись про те, який саме елемент буде кореневим:
 
 ```html
 <base-input
   v-model="username"
   required
-  placeholder="Enter your username"
+  placeholder="Вкажіть своє ім'я"
 ></base-input>
 ```

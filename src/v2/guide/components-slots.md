@@ -4,23 +4,23 @@ type: guide
 order: 104
 ---
 
-> This page assumes you've already read the [Components Basics](components.html). Read that first if you are new to components.
+> Даний розділ передбачає, що ви вже знайомі [компонентами](components.html). Прочитайте його, якщо це не так.
 
-> In 2.6.0, we introduced a new unified syntax (the `v-slot` directive) for named and scoped slots. It replaces the `slot` and `slot-scope` attributes, which are now deprecated, but have _not_ been removed and are still documented [here](#Deprecated-Syntax). The rationale for introducing the new syntax is described in this [RFC](https://github.com/vuejs/rfcs/blob/master/active-rfcs/0001-new-slot-syntax.md).
+> Починаючи з 2.6.0, ми додали підтримку нового синтаксису (директиву `v-slot`) для іменованих слотів та слотів з обмеженою областю видимості. Це замінює атрибути `slot` та `slot-scope`, які вже зараз є застарілими, хоча й _не_ видаленими та досі задокументованими [тут](#Застарілий-синтаксис). Раціональність цього нового синтаксису описано в [RFC (англ.)](https://github.com/vuejs/rfcs/blob/master/active-rfcs/0001-new-slot-syntax.md).
 
-## Slot Content
+## Вміст слотів
 
-Vue implements a content distribution API inspired by the [Web Components spec draft](https://github.com/w3c/webcomponents/blob/gh-pages/proposals/Slots-Proposal.md), using the `<slot>` element to serve as distribution outlets for content.
+Vue впроваджує API передачі вмісту, натхненного [проектом специфікації Веб Компонентів](https://github.com/w3c/webcomponents/blob/gh-pages/proposals/Slots-Proposal.md), використовуючи елемент `<slot>`, що слугує як вхід для прийому вмісту.
 
-This allows you to compose components like this:
+Це дозволяє створювати компоненти наступним чином:
 
 ``` html
 <navigation-link url="/profile">
-  Your Profile
+  Ваш профіль
 </navigation-link>
 ```
 
-Then in the template for `<navigation-link>`, you might have:
+Тепер, в шаблоні компонента `<navigation-link>`, ви можете мати:
 
 ``` html
 <a
@@ -31,58 +31,58 @@ Then in the template for `<navigation-link>`, you might have:
 </a>
 ```
 
-When the component renders, `<slot></slot>` will be replaced by "Your Profile". Slots can contain any template code, including HTML:
+Під час відмальовування компонента, `<slot></slot>` буде замінено на "Ваш профіль". Слоти можуть містити будь-який код, включаючи HTML:
 
 ``` html
 <navigation-link url="/profile">
-  <!-- Add a Font Awesome icon -->
+  <!-- Додає іконку Font Awesome -->
   <span class="fa fa-user"></span>
-  Your Profile
+  Ваш профіль
 </navigation-link>
 ```
 
-Or even other components:
+Та навіть інші компоненти:
 
 ``` html
 <navigation-link url="/profile">
-  <!-- Use a component to add an icon -->
+  <!-- Використовувати компонент, щоб додати іконку -->
   <font-awesome-icon name="user"></font-awesome-icon>
-  Your Profile
+  Ваш профіль
 </navigation-link>
 ```
 
-If `<navigation-link>`'s template did **not** contain a `<slot>` element, any content provided between its opening and closing tag would be discarded.
+Якщо шаблон `<navigation-link>` **не** містить елемент `<slot>`, будь-який вміст, переданий між його відкриваючим та закриваючим тегами буде відкинуто.
 
-## Compilation Scope
+## Область видимості компіляції
 
-When you want to use data inside a slot, such as in:
+Якщо ви хочете використовувати дані всередині слота, як, наприклад:
 
 ``` html
 <navigation-link url="/profile">
-  Logged in as {{ user.name }}
+  Увійшли як {{ user.name }}
 </navigation-link>
 ```
 
-That slot has access to the same instance properties (i.e. the same "scope") as the rest of the template. The slot does **not** have access to `<navigation-link>`'s scope. For example, trying to access `url` would not work:
+Цей слот має доступ до тих ж самих властивостей екземпляру (тобто, та ж сама область видимості), як і решта шаблону. Слот *не** має доступу до області видимості `<navigation-link>`. Наприклад, спроба отримати доступ до `url` була б невдалою:
 
 ``` html
 <navigation-link url="/profile">
-  Clicking here will send you to: {{ url }}
+  Натискаючи тут, ви будете переадресовані до: {{ url }}
   <!--
-  The `url` will be undefined, because this content is passed
-  _to_ <navigation-link>, rather than defined _inside_ the
-  <navigation-link> component.
+  Тут, `url` буде `undefined`, оскільки вміст було передано
+  _до_ <navigation-link>, аніж було визначено _всередині_ самого
+  компонента <navigation-link>.
   -->
 </navigation-link>
 ```
 
-As a rule, remember that:
+Запам'ятайте це як правило:
 
-> Everything in the parent template is compiled in parent scope; everything in the child template is compiled in the child scope.
+> Все, що в батьківському шаблоні компілюється з батьківською областю видимості; все, що в дочірньому шаблоні компілюється з дочірньою областю видимості.
 
-## Fallback Content
+## Вміст за замовчуванням
 
-There are cases when it's useful to specify fallback (i.e. default) content for a slot, to be rendered only when no content is provided. For example, in a `<submit-button>` component:
+Є випадки, коли корисно задавати певний вміст як значення за замовчуванням для слота, який буде відмальовано лише, якщо не було передано жодного вмісту. Наприклад, в компонента `<submit-button>`:
 
 ```html
 <button type="submit">
@@ -90,47 +90,47 @@ There are cases when it's useful to specify fallback (i.e. default) content for 
 </button>
 ```
 
-We might want the text "Submit" to be rendered inside the `<button>` most of the time. To make "Submit" the fallback content, we can place it in between the `<slot>` tags:
+Ми, можливо, хотіли, щоб в більшості випадків текст "Надіслати" відмальовувався всередині `<button>`. Щоб зробити "Надіслати" вмістом за замовчуванням, ми можемо розмістити його між тегами `<slot>`:
 
 ```html
 <button type="submit">
-  <slot>Submit</slot>
+  <slot>Надіслати</slot>
 </button>
 ```
 
-Now when we use `<submit-button>` in a parent component, providing no content for the slot:
+Тепер, якщо не передавати ніякий вміст в батьківському компоненті при використанні `<submit-button>`:
 
 ```html
 <submit-button></submit-button>
 ```
 
-will render the fallback content, "Submit":
+відмалюється вміст за замовчуванням, "Надіслати":
 
 ```html
 <button type="submit">
-  Submit
+  Надіслати
 </button>
 ```
 
-But if we provide content:
+Але якщо ж ми передаємо вміст:
 
 ```html
 <submit-button>
-  Save
+  Зберегти
 </submit-button>
 ```
 
-Then the provided content will be rendered instead:
+Тоді буде відмальовано переданий вміст:
 
 ```html
 <button type="submit">
-  Save
+  Зберегти
 </button>
 ```
 
-## Named Slots
+## Іменовані слоти
 
-> Updated in 2.6.0+. [See here](#Deprecated-Syntax) for the deprecated syntax using the `slot` attribute.
+> Updated in 2.6.0+. [See here](#Застарілий-синтаксис) for the deprecated syntax using the `slot` attribute.
 
 There are times when it's useful to have multiple slots. For example, in a `<base-layout>` component with the following template:
 
@@ -221,11 +221,11 @@ Either way, the rendered HTML will be:
 </div>
 ```
 
-Note that **`v-slot` can only be added to a `<template>`** (with [one exception](#Abbreviated-Syntax-for-Lone-Default-Slots)), unlike the deprecated [`slot` attribute](#Deprecated-Syntax).
+Note that **`v-slot` can only be added to a `<template>`** (with [one exception](#Абревіатурний-синтаксис-для-відокремлених-слотів-за-замовчуванням)), unlike the deprecated [`slot` attribute](#Застарілий-синтаксис).
 
-## Scoped Slots
+## Слоти з обмеженою зоною видимості
 
-> Updated in 2.6.0+. [See here](#Deprecated-Syntax) for the deprecated syntax using the `slot-scope` attribute.
+> Updated in 2.6.0+. [See here](#Застарілий-синтаксис) for the deprecated syntax using the `slot-scope` attribute.
 
 Sometimes, it's useful for slot content to have access to data only available in the child component. For example, imagine a `<current-user>` component with the following template:
 
@@ -267,7 +267,7 @@ Attributes bound to a `<slot>` element are called **slot props**. Now, in the pa
 
 In this example, we've chosen to name the object containing all our slot props `slotProps`, but you can use any name you like.
 
-### Abbreviated Syntax for Lone Default Slots
+### Абревіатурний синтаксис для відокремлених слотів за замовчуванням
 
 In cases like above, when _only_ the default slot is provided content, the component's tags can be used as the slot's template. This allows us to use `v-slot` directly on the component:
 
@@ -311,7 +311,7 @@ Whenever there are multiple slots, use the full `<template>` based syntax for _a
 </current-user>
 ```
 
-### Destructuring Slot Props
+### Деструктуризування вхідних параметрів слота
 
 Internally, scoped slots work by wrapping your slot content in a function passed a single argument:
 
@@ -345,7 +345,7 @@ You can even define fallbacks, to be used in case a slot prop is undefined:
 </current-user>
 ```
 
-## Dynamic Slot Names
+## Динамічні імена слотів
 
 > New in 2.6.0+
 
@@ -359,7 +359,7 @@ You can even define fallbacks, to be used in case a slot prop is undefined:
 </base-layout>
 ```
 
-## Named Slots Shorthand
+## Скорочення іменованих слотів
 
 > New in 2.6.0+
 
@@ -397,7 +397,7 @@ Instead, you must always specify the name of the slot if you wish to use the sho
 </current-user>
 ```
 
-## Other Examples
+## Інші приклади
 
 **Slot props allow us to turn slots into reusable templates that can render different content based on input props.** This is most useful when you are designing a reusable component that encapsulates data logic while allowing the consuming parent component to customize part of its layout.
 
@@ -447,15 +447,15 @@ Now when we use the `<todo-list>` component, we can optionally define an alterna
 
 However, even this barely scratches the surface of what scoped slots are capable of. For real-life, powerful examples of scoped slot usage, we recommend browsing libraries such as [Vue Virtual Scroller](https://github.com/Akryum/vue-virtual-scroller), [Vue Promised](https://github.com/posva/vue-promised), and [Portal Vue](https://github.com/LinusBorg/portal-vue).
 
-## Deprecated Syntax
+## Застарілий синтаксис
 
 > The `v-slot` directive was introduced in Vue 2.6.0, offering an improved, alternative API to the still-supported `slot` and `slot-scope` attributes. The full rationale for introducing `v-slot` is described in this [RFC](https://github.com/vuejs/rfcs/blob/master/active-rfcs/0001-new-slot-syntax.md). The `slot` and `slot-scope` attributes will continue to be supported in all future 2.x releases, but are officially deprecated and will eventually be removed in Vue 3.
 
-### Named Slots with the `slot` Attribute
+### Іменовані слоти з атрибутом `slot`
 
-> <abbr title="Still supported in all 2.x versions of Vue, but no longer recommended.">Deprecated</abbr> in 2.6.0+. See [here](#Named-Slots) for the new, recommended syntax.
+> <abbr title="Still supported in all 2.x versions of Vue, but no longer recommended.">Deprecated</abbr> in 2.6.0+. See [here](#Іменовані-слоти) for the new, recommended syntax.
 
-To pass content to named slots from the parent, use the special `slot` attribute on `<template>` (using the `<base-layout>` component described [here](#Named-Slots) as example):
+To pass content to named slots from the parent, use the special `slot` attribute on `<template>` (using the `<base-layout>` component described [here](#Іменовані-слоти) as example):
 
 ```html
 <base-layout>
@@ -502,11 +502,11 @@ There can still be one unnamed slot, which is the **default slot** that serves a
 </div>
 ```
 
-### Scoped Slots with the `slot-scope` Attribute
+### Слоти обмеженої зони видимості з атрибутом `slot-scope`
 
-> <abbr title="Still supported in all 2.x versions of Vue, but no longer recommended.">Deprecated</abbr> in 2.6.0+. See [here](#Scoped-Slots) for the new, recommended syntax.
+> <abbr title="Still supported in all 2.x versions of Vue, but no longer recommended.">Deprecated</abbr> in 2.6.0+. See [here](#Слоти-з-обмеженою-зоною-видимості) for the new, recommended syntax.
 
-To receive props passed to a slot, the parent component can use `<template>` with the `slot-scope` attribute (using the `<slot-example>` described [here](#Scoped-Slots) as example):
+To receive props passed to a slot, the parent component can use `<template>` with the `slot-scope` attribute (using the `<slot-example>` described [here](#Слоти-з-обмеженою-зоною-видимості) as example):
 
 ``` html
 <slot-example>
@@ -548,7 +548,7 @@ The value of `slot-scope` can accept any valid JavaScript expression that can ap
 </slot-example>
 ```
 
-Using the `<todo-list>` described [here](#Other-Examples) as an example, here's the equivalent usage using `slot-scope`:
+Using the `<todo-list>` described [here](#Інші-приклади) as an example, here's the equivalent usage using `slot-scope`:
 
 ``` html
 <todo-list v-bind:todos="todos">
