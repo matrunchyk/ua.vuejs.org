@@ -9,8 +9,8 @@
 <% } %>
 <div class="content <%- page.type ? page.type + ' with-sidebar' : '' %> <%- page.type === 'guide' ? page.path.replace(/.+\//, '').replace('.html', '') + '-guide' : '' %>">
   <p class="tip warning v3-warning">
-    You’re browsing the documentation for v2.x and ealier.
-    For v3.x, <a href="https://v3.vuejs.org/">click here</a>.
+    Ви переглядаєте документацію для v2.x та раніших версій.
+    <a href="https://v3.vuejs.org.ua/">Натисніть тут</a>, щоб перейти на документацію по v3.x.
   </p>
 
   <% if (page.type) { %>
@@ -55,7 +55,7 @@
     <a href="https://github.com/vuejsorgua/vue2-docs/blob/master/src/<%- page.path.replace(/\.html$/, '.md') %>" rel="noopener" target="_blank">
       Відредагуйте цe на GitHub!
     </a>
-    Deployed on
+    Сайт працює на платформі
     <a href="https://url.netlify.com/HJ8X2mxP8" rel="noopener" target="_blank">
       Netlify
     </a>.
